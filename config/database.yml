@@ -1,0 +1,24 @@
+default: &default
+  adapter: postgresql
+  username: <%= ENV["INICRO_USER"] %>
+  password: <%= ENV["INICRO_PASSWORD"] %>
+  encoding: unicode
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *default
+  database: inicro_development
+  host: localhost
+
+test:
+  <<: *default
+  database: inicro_testing
+  host: localhost
+
+production:
+  <<: *default
+  username: <%= ENV["INICRO_PROD_USER"] %>
+  password: <%= ENV["INICRO_PROD_PASSWORD"] %>
+  host: <%= ENV["INICRO_PROD_HOST"] %>
+  port: <%= ENV["INICRO_PROD_PORT"] %>
