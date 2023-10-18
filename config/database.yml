@@ -5,16 +5,15 @@ default: &default
   encoding: unicode
   pool: 5
   timeout: 5000
+  host: localhost
 
 development:
   <<: *default
   database: inicro_development
-  host: localhost
 
 test:
   <<: *default
   database: inicro_testing
-  host: localhost
 
 production:
   <<: *default
