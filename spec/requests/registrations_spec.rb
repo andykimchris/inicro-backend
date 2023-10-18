@@ -1,16 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe "Registrations", type: :request do
-  let (:user) { build_user }
-  let (:existing_user) { create_user }
+  let (:new_user) { build_user }
   let (:signup_url) { "/users/signup" }
 
   context "when creating a new user" do
     before do
       post signup_url, params: { user: {
-          email: user.email, password: user.password,
-          password_confirmation: user.password_confirmation,
-          is_occupant: user.is_occupant, is_proprietor: user.is_proprietor
+          email: new_user.email, password: new_user.password,
+          password_confirmation: new_user.password_confirmation,
+          is_occupant: new_user.is_occupant, is_proprietor: new_user.is_proprietor
         }
       }
     end
@@ -22,8 +21,8 @@ RSpec.describe "Registrations", type: :request do
     context "when a required field is missing" do
       before do
         post signup_url, params: { user: {
-            email: user.email, password: user.password,
-            password_confirmation: user.password_confirmation,
+            email: new_user.email, password: new_user.password,
+            password_confirmation: new_user.password_confirmation,
           }
         }
       end
