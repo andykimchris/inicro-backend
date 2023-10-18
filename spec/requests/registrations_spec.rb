@@ -4,7 +4,7 @@ RSpec.describe "Registrations", type: :request do
   let (:new_user) { build_user }
   let (:signup_url) { "/users/signup" }
 
-  context "when creating a new user" do
+  context "when creating a new valid user" do
     before do
       post signup_url, params: { user: {
           email: new_user.email, password: new_user.password,
@@ -14,33 +14,32 @@ RSpec.describe "Registrations", type: :request do
       }
     end
 
-    it "returns created (201)" do
-      expect(response.status).to eq 201
-    end
-
-    context "when a required field is missing" do
-      before do
-        post signup_url, params: { user: {
-            email: new_user.email, password: new_user.password,
-            password_confirmation: new_user.password_confirmation,
-          }
-        }
-      end
-
-      it "returns unprocessable entity (442)" do
-        expect(response.status).to eq 422
-      end
-    end
-
-
     it "returns a bearer token in response headers" do
       expect(response.headers["Authorization"]).to be_present
     end
 
-    it "returns a success message and the user" do
+    it "returns created (201)" do
+      expect(response.status).to eq 201
+    end
+
+    it "returns a success message" do
       json_response = JSON.parse(response.body)
       expect(json_response["message"]).to eq("You've signed up sucessfully.")
     end
   end
 
+  context "when creating an invalid user with missing required field(s)" do
+    before do
+      post signup_url, params: { user: {
+          email: new_user.email,
+          password: new_user.password,
+          password_confirmation: new_user.password_confirmation,
+        }
+      }
+    end
+
+    it "returns unprocessable entity (442)" do
+      expect(response.status).to eq 422
+    end
+  end
 end
