@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
 
- devise :database_authenticatable, :registerable,
-        :recoverable, :rememberable, :validatable,
-        :omniauthable,
-        :jwt_authenticatable, jwt_revocation_strategy: JwtDenylist
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable,
+         :omniauthable,
+         :jwt_authenticatable, jwt_revocation_strategy: JwtDenylist
 
-  validates :email, presence: :true, uniqueness: :true
+  validates :email, presence: true, uniqueness: true
   validates :is_proprietor, inclusion: { in: [true, false] }
   validates :is_occupant, inclusion: { in: [true, false] }
 
@@ -19,16 +21,15 @@ class User < ApplicationRecord
   private
 
   def password_matcher
-    unless password.match(PASSWORD_REGEX)
-      errors.add(:password, "must include at least one lowercase letter, one uppercase letter, one digit, and one special character.")
-    end
+    return if password.match(PASSWORD_REGEX)
+
+    errors.add(:password,
+               'must include at least one lowercase letter, one uppercase letter, one digit, and one special character.')
   end
 
   def either_proprietor_or_occupant
-    unless is_proprietor ^ is_occupant
-      errors.add(:base, "User must either be a proprietor or an occupant.")
-    end
+    return if is_proprietor ^ is_occupant
+
+    errors.add(:base, 'User must either be a proprietor or an occupant.')
   end
-
 end
-
