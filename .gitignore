@@ -11,13 +11,14 @@
 /.env*
 !/.env*.erb
 
-.keep*
-
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+
+.keep*
+/test/.keep*
 
 # Ignore pidfiles, but keep the directory.
 /tmp/pids/*
@@ -30,6 +31,19 @@
 /tmp/storage/*
 !/tmp/storage/
 !/tmp/storage/.keep
+tmp/storage/.keep
+tmp/pids/.keep
+storage/.keep
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Ignore test coverage reports
+/coverage.data
+/coverage/
+
+# RubyMine project files
+.idea
+
+.byebug_history
+
