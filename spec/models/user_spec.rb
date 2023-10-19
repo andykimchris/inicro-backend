@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
 
   context "when validating proprietor vs occupant information" do
-    it "creates a valid user when one is true and other false" do
+    it "creates a valid user when one is true and the other is false" do
       user = create_user
       expect(user).to be_valid
     end
