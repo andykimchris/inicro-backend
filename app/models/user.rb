@@ -6,6 +6,10 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
+         :omniauthable,
+         :jwt_authenticatable, jwt_revocation_strategy: JwtDenylist
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable,
          :confirmable,
          :jwt_authenticatable, jwt_revocation_strategy: JwtDenylist
 
@@ -31,6 +35,10 @@ class User < ApplicationRecord
   private
 
   def password_matcher
+    return if password.match(PASSWORD_REGEX)
+
+    errors.add(:password,
+               'must include at least one lowercase letter, one uppercase letter, one digit, and one special character.')
     return if password.match(PASSWORD_REGEX)
 
     errors.add(:password, 'must include at least one lowercase letter,one uppercase letter,one digit,and one special character.')

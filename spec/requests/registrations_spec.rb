@@ -9,6 +9,10 @@ RSpec.describe 'Registrations' do
   context 'when creating a new valid user' do
     before do
       post signup_url, params: { user: {
+        email: new_user.email, password: new_user.password,
+        password_confirmation: new_user.password_confirmation,
+        is_occupant: new_user.is_occupant, is_proprietor: new_user.is_proprietor
+      } }
         email: proprietor_user.email, password: proprietor_user.password,
         password_confirmation: proprietor_user.password_confirmation,
         is_occupant: proprietor_user.is_occupant, is_proprietor: proprietor_user.is_proprietor
@@ -28,6 +32,10 @@ RSpec.describe 'Registrations' do
   context 'when creating an invalid user with missing required field(s)' do
     before do
       post signup_url, params: { user: {
+        email: new_user.email,
+        password: new_user.password,
+        password_confirmation: new_user.password_confirmation
+      } }
         email: proprietor_user.email,
         password: proprietor_user.password,
         password_confirmation: proprietor_user.password_confirmation
