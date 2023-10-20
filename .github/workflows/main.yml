@@ -47,6 +47,7 @@ jobs:
       - name: Database setup
         env:
           RAILS_ENV: test
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
         run: |
           bundle exec rails db:prepare db:migrate
