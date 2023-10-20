@@ -28,33 +28,28 @@ jobs:
             --health-cmd pg_isready
             --health-interval 10s
             --health-timeout 5s
-            --health-retries 5
 
     steps:
-        - name: Checkout code
-          uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true #
 
-        - name: Set up Ruby
-          uses: actions/setup-ruby@v1
-          with:
-            ruby-version: 3.1.4
-            bundler-cache: true
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle install
 
-        - name: Install dependencies
-          run: |
-            gem install bundler
-            bundle install
+      - name: Database setup
+        env:
+          RAILS_ENV: test
 
-        - name: Database setup
-          env:
-            RAILS_ENV: test
+        run: |
+          bundle exec rails db:prepare
 
-          run: |
-            bundle exec rails db:prepare
-
-        - name: RSpec tests
-          run: |
-            bundle exec rspec
+      - name: RSpec tests
+        run: |
+          bundle exec rspec
 
   lint:
     name:  Linting and Security Audit
