@@ -51,6 +51,18 @@ group :development, :test do
   gem 'better_errors'
   gem 'debug', platforms: %i[mri windows]
   gem 'simplecov'
+
+  # Security tools
+  gem 'brakeman'
+  gem 'bundler-audit'
+  gem 'ruby_audit'
+
+  # Linter
+  gem 'rubocop', require: false
+  gem 'rubocop-factory_bot', require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
 end
 
 group :development do
@@ -66,10 +78,4 @@ group :test do
   gem 'faker'
   gem 'pry'
   gem 'rspec-rails', '~> 6.0.0'
-
-  gem 'rubocop', require: false
-  gem 'rubocop-factory_bot', require: false
-  gem 'rubocop-performance', require: false
-  gem 'rubocop-rails', require: false
-  gem 'rubocop-rspec', require: false
 end
