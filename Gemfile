@@ -70,7 +70,8 @@ group :development do
   # gem "spring"
   gem 'factory_bot_rails'
 
-  gem 'error_highlight', '>= 0.4.0', platforms: [:ruby]
+  # TODO: Figure out why this gem brings down Github Actions
+  # gem 'error_highlight', '>= 0.4.0', platforms: [:ruby]
 end
 
 group :test do

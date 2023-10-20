@@ -55,6 +55,12 @@ jobs:
         run: |
           bundle exec rspec
 
+      - name: Create code coverage report
+        uses: actions/upload-artifact@v2
+        with:
+          name: code-coverage
+          path: code-coverage/
+
   lint:
     name:  Linting and Security Audit
     runs-on: ubuntu-latest
