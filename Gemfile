@@ -56,13 +56,6 @@ group :development, :test do
   gem 'brakeman'
   gem 'bundler-audit'
   gem 'ruby_audit'
-
-  # Linter
-  gem 'rubocop', require: false
-  gem 'rubocop-factory_bot', require: false
-  gem 'rubocop-performance', require: false
-  gem 'rubocop-rails', require: false
-  gem 'rubocop-rspec', require: false
 end
 
 group :development do
@@ -79,4 +72,11 @@ group :test do
   gem 'faker'
   gem 'pry'
   gem 'rspec-rails', '~> 6.0.0'
+
+  # Linter
+  gem 'rubocop', require: false
+  gem 'rubocop-factory_bot', require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
 end
