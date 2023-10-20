@@ -14,3 +14,12 @@ AllCops:
     - "script/**/*"
     - "bin/{rails,rake,bundle}"
     - "Rakefile"
+
+Style/Documentation:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Max: 15
+
+RSpec/MultipleExpectations:
+  Max: 3
