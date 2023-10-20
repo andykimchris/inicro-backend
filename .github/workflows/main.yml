@@ -33,7 +33,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
         with:
-          bundler-cache: true #
+          bundler-cache: true
 
       - name: Install dependencies
         run: |
@@ -45,7 +45,7 @@ jobs:
           RAILS_ENV: test
 
         run: |
-          bin/rails db:test:prepare
+          bundle exec rails db:schema:load
 
       - name: RSpec tests
         run: |
@@ -62,7 +62,6 @@ jobs:
         - name: Set up Ruby
           uses: actions/setup-ruby@v1
           with:
-            ruby-version: 3.1.4
             bundler-cache: true
 
         - name: Install dependencies
