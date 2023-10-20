@@ -34,6 +34,7 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+          ruby-version: 3.2.2
 
       - name: Install dependencies
         run: |
@@ -45,7 +46,7 @@ jobs:
           RAILS_ENV: test
 
         run: |
-          bundle exec rails db:create db:schema:load db:migrate
+          bundle exec rails db:prepare db:migrate
 
       - name: RSpec tests
         run: |
@@ -63,6 +64,7 @@ jobs:
           uses: actions/setup-ruby@v1
           with:
             bundler-cache: true
+            ruby-version: 3.2.2
 
         - name: Install dependencies
           run: |
