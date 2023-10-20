@@ -37,7 +37,6 @@ jobs:
         uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf
         with:
           bundler-cache: true
-          ruby-version: 3.1.4
 
       - name: Install dependencies
         run: |
@@ -74,7 +73,6 @@ jobs:
           uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf
           with:
             bundler-cache: true
-            ruby-version: 3.1.4
 
         - name: Install dependencies
           run: |
@@ -88,5 +86,4 @@ jobs:
           run: bundle exec brakeman -q -w2
 
         - name: Lint via RuboCop
-          run: |
-            bundle exec rubocop --parallel -A
+          run: bundle exec rubocop --parallel -A
