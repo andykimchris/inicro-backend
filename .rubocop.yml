@@ -23,3 +23,6 @@ RSpec/ExampleLength:
 
 RSpec/MultipleExpectations:
   Max: 3
+
+Rails/LexicallyScopedActionFilter:
+  Enabled: false
