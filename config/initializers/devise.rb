@@ -22,6 +22,7 @@ Devise.setup do |config|
 
   config.jwt do |jwt|
     jwt.secret = ENV["JWT_SECRET_KEY"]
+    p ENV
     warn('warning: jwt.secret can not be nil') if jwt.secret.nil?
 
     jwt.dispatch_requests = [
