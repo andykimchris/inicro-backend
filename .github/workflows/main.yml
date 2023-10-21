@@ -37,19 +37,25 @@ jobs:
         uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf
         with:
           bundler-cache: true
+          ruby-version: 3.1.4
 
       - name: Install dependencies
         run: |
           gem install bundler
           bundle install
 
+      - name: Install PostgreSQL client
+        run: |
+          sudo apt-get -yqq install libpq-dev
+
       - name: Database setup
         env:
+          DATABASE_URL: postgres://postgres:password@localhost:5432/inicro_testing
           RAILS_ENV: test
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
         run: |
-          bundle exec rails db:prepare db:migrate
+          bundle exec rails db:test:prepare db:migrate RAILS_ENV=test
 
       - name: RSpec tests
         run: |
@@ -59,7 +65,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: code-coverage
-          path: code-coverage/
+          path: coverage/
 
   lint:
     name:  Linting and Security Audit
@@ -73,6 +79,7 @@ jobs:
           uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf
           with:
             bundler-cache: true
+            ruby-version: 3.1.4
 
         - name: Install dependencies
           run: |
