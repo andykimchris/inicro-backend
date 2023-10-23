@@ -5,7 +5,7 @@ default: &default
   encoding: unicode
   pool: 5
   timeout: 5000
-  host: 127.0.0.1
+  host: ""
 
 development:
   <<: *default
@@ -16,7 +16,7 @@ test:
   database: inicro_testing
   username: inicro
   password: 15040mhs!
-  host: 127.0.0.1
+  host: ""
 
 production:
   <<: *default

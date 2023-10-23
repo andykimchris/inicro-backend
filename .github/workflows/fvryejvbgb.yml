@@ -1,16 +1,15 @@
 name: PG2
 
 on:
-    push:
-      branches:
-        - "*"
+  push:
+    branches:
+      - "*"
 
-    pull_request:
-        branches:
-            - develop
+  pull_request:
+    branches:
+      - develop
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     services:
@@ -41,7 +40,7 @@ jobs:
         env:
           RAILS_ENV: "test"
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-          DATABASE_URL: "postgres://postgres@localhost:5432/inicro_testing"
+          DATABASE_URL: "postgres://inicro@15040mhs!:5432/inicro_testing"
         run: |
           bundle exec rails db:setup
           bundle exec rspec
