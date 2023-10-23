@@ -93,5 +93,5 @@ jobs:
         - name: Security audit application code
           run: bundle exec brakeman -q -w2
 
-        # - name: Lint via RuboCop
-        #   run: bundle exec rubocop --parallel -A
+        - name: Lint via RuboCop
+          run: bundle exec rubocop --parallel -A

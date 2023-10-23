@@ -3,6 +3,7 @@
 require 'faker'
 require 'factory_bot_rails'
 
+# rrbeibfe
 module UserHelpers
   def create_user
     FactoryBot.create(:user, email: Faker::Internet.email, password: 'Johndoe123&', is_occupant: false,
