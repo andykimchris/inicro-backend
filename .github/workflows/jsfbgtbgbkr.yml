@@ -16,7 +16,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres:13
+        image: postgres:latest
         env:
           POSTGRES_USER: inicro
           POSTGRES_PASSWORD: 15040mhs!
