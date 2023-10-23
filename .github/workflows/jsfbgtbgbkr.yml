@@ -1,4 +1,4 @@
-name: Rails Backend CI/CD V2
+name: Andy 1
 
 on:
   push:
@@ -47,6 +47,11 @@ jobs:
       - name: Install PostgreSQL client
         run: |
           sudo apt-get -yqq install libpq-dev
+
+      - name: Start PostgreSQL service
+        run: |
+            sudo service postgresql start
+
       - name: Database setup
         env:
           DATABASE_URL: postgres://inicro:15040mhs!@localhost:5432/inicro_testing
