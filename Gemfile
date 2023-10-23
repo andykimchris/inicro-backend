@@ -72,6 +72,7 @@ group :test do
   gem 'pry'
   gem 'rspec-rails', '~> 6.0.0'
 
+  gem 'panolint'
   gem 'rubocop', require: false
   gem 'rubocop-factory_bot', require: false
   gem 'rubocop-performance', require: false
