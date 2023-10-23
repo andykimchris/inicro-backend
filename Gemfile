@@ -51,6 +51,11 @@ group :development, :test do
   gem 'better_errors'
   gem 'debug', platforms: %i[mri windows]
   gem 'simplecov'
+
+  # Security tools
+  gem 'brakeman'
+  gem 'bundler-audit'
+  gem 'ruby_audit'
 end
 
 group :development do
