@@ -74,8 +74,8 @@ jobs:
           echo "Debug: Checking PostgreSQL service status"
           service postgresql status
 
-          echo "Debug: Checking PostgreSQL connectivity"
-          psql -h localhost -U ${{ secrets.POSTGRES_USER }} -d inicro_testing -c 'SELECT version();'
+          # echo "Debug: Checking PostgreSQL connectivity"
+          # psql -h localhost -U ${{ secrets.POSTGRES_USER }} -d inicro_testing -c 'SELECT version();'
 
           bundle exec rails db:test:prepare db:migrate RAILS_ENV=test
       - name: RSpec tests
