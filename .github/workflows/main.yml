@@ -2,7 +2,8 @@ name: Rails Backend CI/CD V2
 
 on:
     push:
-      branches: "*"
+      branches:
+        - "*"
 
 jobs:
   test:
