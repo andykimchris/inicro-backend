@@ -5,6 +5,11 @@ on:
       branches:
         - "*"
 
+    pull_request:
+        branches:
+            - develop
+
+
 jobs:
   test:
     name: Rspec Test Environment
