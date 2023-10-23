@@ -1,7 +1,7 @@
 default: &default
   adapter: postgresql
-  username: <%= ENV["INICRO_USER"] %>
-  password: <%= ENV["INICRO_PASSWORD"] %>
+  username: inicro
+  password: 15040mhs!
   encoding: unicode
   pool: 5
   timeout: 5000
