@@ -16,7 +16,8 @@ jobs:
     # Similar to docker-compose.yml but not the same, 🤷‍♂️
     services:
       postgres:
-        image: postgres:11.6-alpine
+        image: postgres:latest
+
         env:
           POSTGRES_PASSWORD: password
         ports:

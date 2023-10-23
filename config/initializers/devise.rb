@@ -21,11 +21,7 @@ Devise.setup do |config|
   # config.parent_controller = 'DeviseController'
 
   config.jwt do |jwt|
-    p Rails.application.credentials.devise
-    p Rails.application.credentials.secret_key_base
-    p ENV["JWT_SECRET_KEY"]
-
-    jwt.secret = Rails.application.credentials.secret_key_base
+    jwt.secret = Rails.application.credentials.devise[:jwt_secret_key]
     warn('warning: jwt.secret can not be nil') if jwt.secret.nil?
 
     jwt.dispatch_requests = [

@@ -15,7 +15,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres:12.1-alpine
+        image: postgres:latest
         ports:
           - 5432:5432
         # needed because the postgres container does not provide a healthcheck
@@ -40,6 +40,7 @@ jobs:
       - name: Test with RSpec
         env:
           RAILS_ENV: "test"
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
           DATABASE_URL: "postgres://postgres@localhost:5432/inicro_testing"
         run: |
           bundle exec rails db:setup

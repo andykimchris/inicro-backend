@@ -13,7 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: postgres:11
+        image: postgres:latest
+
         ports:
           - 5432:5432
         env:
@@ -42,6 +43,8 @@ jobs:
         env:
           RAILS_ENV: test
           POSTGRES_USER: postgres
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+
           POSTGRES_PASSWORD: postgres
 
       - name: Run RSpec
@@ -50,3 +53,5 @@ jobs:
           RAILS_ENV: test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+

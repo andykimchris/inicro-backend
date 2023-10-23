@@ -14,7 +14,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres:11
+        image: postgres:latest
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
@@ -34,6 +34,8 @@ jobs:
         env:
           DATABASE_URL: postgres://postgres:@localhost:5432/inicro_testing
           RAILS_ENV: test
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
         run: |
