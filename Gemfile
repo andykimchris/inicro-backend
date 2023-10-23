@@ -72,7 +72,8 @@ group :test do
   gem 'pry'
   gem 'rspec-rails', '~> 6.0.0'
 
-  gem 'panolint'
+  gem 'panolint-rails', git: 'https://github.com/panorama-ed/panolint-rails.git', branch: 'main'
+  gem 'panolint-ruby', git: 'https://github.com/panorama-ed/panolint-ruby.git', branch: 'main'
   gem 'rubocop', require: false
   gem 'rubocop-factory_bot', require: false
   gem 'rubocop-performance', require: false
