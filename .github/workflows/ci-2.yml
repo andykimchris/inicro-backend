@@ -1,4 +1,5 @@
 name: CI
+
 on:
     push:
       branches:
@@ -7,14 +8,12 @@ on:
     pull_request:
         branches:
             - develop
-
 jobs:
   build:
     runs-on: ubuntu-latest
     services:
       postgres:
         image: postgres:latest
-
         ports:
           - 5432:5432
         env:
@@ -22,7 +21,7 @@ jobs:
           POSTGRES_PASSWORD: postgres
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v1
 
       - uses: actions/setup-ruby@v1
         with:
@@ -38,13 +37,12 @@ jobs:
 
       - name: Setup Database
         run: |
+          cp config/database.yml.github-actions config/database.yml
           bundle exec rails db:create
           bundle exec rails db:schema:load
         env:
           RAILS_ENV: test
           POSTGRES_USER: postgres
-          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-
           POSTGRES_PASSWORD: postgres
 
       - name: Run RSpec
@@ -53,5 +51,3 @@ jobs:
           RAILS_ENV: test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-
