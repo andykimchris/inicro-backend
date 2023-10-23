@@ -50,7 +50,7 @@ jobs:
 
       - name: Start PostgreSQL service
         run: |
-            sudo service postgresql start
+            sudo service postgresql restart
 
       - name: Log PostgreSQL server logs
         run: |
