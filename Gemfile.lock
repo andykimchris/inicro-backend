@@ -1,22 +1,3 @@
-GIT
-  remote: https://github.com/panorama-ed/panolint-rails.git
-  revision: 890ecaa7fd23e095f1a4caccbfc422fbfd4ce8e7
-  branch: main
-  specs:
-    panolint-rails (0)
-      brakeman (= 6.0.1)
-      rubocop-rails (= 2.21.2)
-
-GIT
-  remote: https://github.com/panorama-ed/panolint-ruby.git
-  revision: 30dd2b3834314d5da02d88def5cfe05cd182d11a
-  branch: main
-  specs:
-    panolint-ruby (0)
-      rubocop (= 1.57.1)
-      rubocop-performance (= 1.19.1)
-      rubocop-rspec (= 2.24.1)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -380,8 +361,6 @@ DEPENDENCIES
   omniauth
   omniauth-facebook
   omniauth-google-oauth2
-  panolint-rails!
-  panolint-ruby!
   pg (~> 1.1)
   pry
   puma (>= 5.0)

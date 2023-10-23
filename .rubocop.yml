@@ -16,3 +16,8 @@ AllCops:
     - "script/**/*"
     - "bin/{rails,rake,bundle}"
     - "Rakefile"
+    - vendor/bundle/**/*
+
+  inherit_mode:
+    merge:
+      - Exclude
