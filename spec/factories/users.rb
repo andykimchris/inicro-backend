@@ -7,5 +7,6 @@ FactoryBot.define do
     password_confirmation { 'Johndoe123&' }
     is_occupant { false }
     is_proprietor { true }
+    confirmed_at { Time.zone.now }
   end
 end

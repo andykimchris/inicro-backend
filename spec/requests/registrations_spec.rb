@@ -15,10 +15,6 @@ RSpec.describe 'Registrations' do
       } }
     end
 
-    it 'returns a bearer token in response headers' do
-      expect(response.headers['Authorization']).to be_present
-    end
-
     it 'returns created (201)' do
       expect(response).to have_http_status :created
     end
