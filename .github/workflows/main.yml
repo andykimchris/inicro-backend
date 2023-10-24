@@ -21,7 +21,6 @@ jobs:
           env:
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: password
-            # POSTGRES_DB: inicro_testing
           ports:
             - 5432:5432
           options:
