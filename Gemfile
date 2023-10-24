@@ -7,6 +7,9 @@ ruby '3.1.4'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.1.1'
 
+# gem "figaro"
+gem 'dotenv-rails', require: 'dotenv/rails-now'
+
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
 
@@ -28,9 +31,6 @@ gem 'omniauth-google-oauth2'
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
-# gem "figaro"
-gem 'dotenv-rails'
-
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
 
@@ -51,6 +51,11 @@ group :development, :test do
   gem 'better_errors'
   gem 'debug', platforms: %i[mri windows]
   gem 'simplecov'
+
+  # Security tools
+  gem 'brakeman'
+  gem 'bundler-audit'
+  gem 'ruby_audit'
 end
 
 group :development do
@@ -58,7 +63,8 @@ group :development do
   # gem "spring"
   gem 'factory_bot_rails'
 
-  gem 'error_highlight', '>= 0.4.0', platforms: [:ruby]
+  # TODO: Figure out why this gem brings down Github Actions
+  # gem 'error_highlight', '>= 0.4.0', platforms: [:ruby]
 end
 
 group :test do
@@ -67,6 +73,7 @@ group :test do
   gem 'pry'
   gem 'rspec-rails', '~> 6.0.0'
 
+  # Linter
   gem 'rubocop', require: false
   gem 'rubocop-factory_bot', require: false
   gem 'rubocop-performance', require: false

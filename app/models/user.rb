@@ -23,8 +23,7 @@ class User < ApplicationRecord
   def password_matcher
     return if password.match(PASSWORD_REGEX)
 
-    errors.add(:password,
-               'must include at least one lowercase letter, one uppercase letter, one digit, and one special character.')
+    errors.add(:password, 'must include at least one lowercase letter,one uppercase letter,one digit,and one special character.')
   end
 
   def either_proprietor_or_occupant

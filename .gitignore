@@ -37,6 +37,7 @@ storage/.keep
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+/config/credentials.yml.enc
 
 # Ignore test coverage reports
 /coverage.data
@@ -47,3 +48,4 @@ storage/.keep
 
 .byebug_history
 
+.vscode

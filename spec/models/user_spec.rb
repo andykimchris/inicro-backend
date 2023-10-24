@@ -38,7 +38,8 @@ RSpec.describe User do
       )
 
       expect(user).not_to be_valid
-      expect(user.errors[:password]).to include('must include at least one lowercase letter, one uppercase letter, one digit, and one special character.')
+      expect(user.errors[:password])
+        .to include('must include at least one lowercase letter,one uppercase letter,one digit,and one special character.')
     end
   end
 end
