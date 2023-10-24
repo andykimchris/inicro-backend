@@ -9,6 +9,6 @@ Rails.application.routes.draw do
   # root "posts#index"
   devise_for :users,
             path_names: { registration: "signup", sign_in: "login", sign_out: "logout"},
-            controllers: { registrations: 'users/registrations', sessions: "users/sessions" }
+            controllers: { registrations: 'users/registrations', sessions: "users/sessions", confirmation: "users/confirmations"}
 
 end
