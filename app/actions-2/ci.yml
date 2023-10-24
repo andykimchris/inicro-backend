@@ -1,12 +1,12 @@
 name: Continuous integration
 on:
-    push:
-      branches:
-        - "*"
+  push:
+    branches:
+      - "*"
 
-    pull_request:
-        branches:
-            - develop
+  pull_request:
+    branches:
+      - develop
 
 jobs:
   test:
@@ -17,10 +17,9 @@ jobs:
         image: postgres:latest
         env:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-        ports: ['5432:5432']
-        options:
-          --health-cmd pg_isready
+          POSTGRES_PASSWORD: 15040mhs!
+        ports: ["5432:5432"]
+        options: --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
@@ -30,14 +29,19 @@ jobs:
         uses: actions/setup-ruby@v1
         with:
           ruby-version: 3.1.4
+
+      - name: Start PostgreSQL service
+        run: |
+          sudo service postgresql restart
+
       - name: Build and run test
         env:
-          DATABASE_URL: postgres://postgres:@localhost:5432/inicro_testing
+          DATABASE_URL: postgres://postgres:15040mhs!@localhost:5432/inicro_testing
           RAILS_ENV: test
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_PASSWORD: 15040mhs!
         run: |
           sudo apt-get -yqq install libpq-dev
           gem install bundler
@@ -45,5 +49,3 @@ jobs:
           bundle exec rails db:create
           bundle exec rails db:migrate
           bundle exec rspec
-
-

@@ -1,13 +1,13 @@
 name: CI
 
 on:
-    push:
-      branches:
-        - "*"
+  push:
+    branches:
+      - "*"
 
-    pull_request:
-        branches:
-            - develop
+  pull_request:
+    branches:
+      - develop
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -35,19 +35,24 @@ jobs:
           gem install bundler
           bundle install --jobs 4 --retry 3
 
+      - name: Start PostgreSQL service
+        run: |
+          sudo service postgresql restart
+
       - name: Setup Database
         run: |
-          cp config/database.yml.github-actions config/database.yml
           bundle exec rails db:create
           bundle exec rails db:schema:load
         env:
           RAILS_ENV: test
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_PASSWORD: 15040mhs!
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
       - name: Run RSpec
         run: COVERAGE=true bundle exec rspec  --require rails_helper
         env:
           RAILS_ENV: test
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_PASSWORD: 15040mhs!

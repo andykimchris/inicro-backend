@@ -49,6 +49,12 @@ jobs:
       - name: Install PostgreSQL client
         run: |
           sudo apt-get -yqq install libpq-dev
+
+
+      - name: Start PostgreSQL service
+        run: |
+              sudo service postgresql restart
+
       - name: Database setup
         env:
           INICRO_USER: postgres

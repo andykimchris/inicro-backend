@@ -1,6 +1,6 @@
 default: &default
   adapter: postgresql
-  username: inicro
+  username: postgres
   password: 15040mhs!
   encoding: unicode
   pool: 5
@@ -14,7 +14,7 @@ development:
 test:
   <<: *default
   database: inicro_testing
-  username: inicro
+  username: postgres
   password: 15040mhs!
   host: ""
 
