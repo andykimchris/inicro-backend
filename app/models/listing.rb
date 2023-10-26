@@ -5,4 +5,6 @@ class Listing < ApplicationRecord
   has_one :location, dependent: :destroy
 
   enum type: { residential: 0, commercial: 1, land: 2 }
+
+  validates :title, :description, presence: true
 end

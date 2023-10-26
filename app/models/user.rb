@@ -9,13 +9,10 @@ class User < ApplicationRecord
          :omniauthable, :confirmable,
          :jwt_authenticatable, jwt_revocation_strategy: JwtDenylist
 
-  # ASSOCIATIONS
   has_many :listings, -> { where is_proprietor: true }, dependent: :destroy, inverse_of: :user
 
-  # VALIDATIONS
   validates :email, presence: true, uniqueness: true
-  validates :is_proprietor, inclusion: { in: [true, false] }
-  validates :is_occupant, inclusion: { in: [true, false] }
+  validates :is_proprietor, :is_occupant, inclusion: { in: [true, false] }
 
   validate :either_proprietor_or_occupant
   validate :password_matcher
