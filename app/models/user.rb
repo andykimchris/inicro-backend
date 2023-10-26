@@ -15,6 +15,10 @@ class User < ApplicationRecord
 
   has_many :listings, dependent: :destroy, inverse_of: :user
 
+  # ASSOCIATIONS
+  has_many :listings, -> { where is_proprietor: true }, dependent: :destroy, inverse_of: :user
+
+  # VALIDATIONS
   validates :email, presence: true, uniqueness: true
   validates :is_proprietor, :is_occupant, inclusion: { in: [true, false] }
 
