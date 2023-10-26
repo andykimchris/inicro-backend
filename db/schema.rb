@@ -24,8 +24,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_26_095106) do
   end
 
   create_table "listings", force: :cascade do |t|
-    t.string "title"
-    t.text "description"
+    t.string "title", null: false
+    t.text "description", null: false
     t.integer "size"
     t.text "metadata"
     t.integer "floor_count"
@@ -39,12 +39,12 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_26_095106) do
   end
 
   create_table "locations", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
+    t.string "name", null: false
+    t.text "description", null: false
     t.float "latitude"
     t.float "longitude"
-    t.string "address"
-    t.string "city"
+    t.string "address", null: false
+    t.string "city", null: false
     t.string "state"
     t.string "postal_code"
     t.string "country"
