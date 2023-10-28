@@ -9,5 +9,6 @@ FactoryBot.define do
     location { nil }
     metadata { 'MyText' }
     floor_count { 1 }
+    listing_type { 0 }
   end
 end
