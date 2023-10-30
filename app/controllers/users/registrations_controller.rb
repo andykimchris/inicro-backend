@@ -26,7 +26,7 @@ module Users
     end
 
     def register_success_deletion
-      render json: { message: 'Account deleted successfully.' }, status: :no_content
+      head :no_content
     end
 
     def register_failed

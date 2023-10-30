@@ -28,4 +28,10 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  activerecord:
+    errors:
+      models:
+        listing:
+          attributes:
+            site_link:
+              site_link_format: "must start with 'https://' and be a valid URL"

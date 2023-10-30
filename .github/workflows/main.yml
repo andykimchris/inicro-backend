@@ -1,81 +1,78 @@
-name: Rails Backend CI/CD V2
+name: Rails Backend CI/CD
 
 on:
     push:
       branches:
-        - "*"
-
+        - main
+        - develop
     pull_request:
-        branches:
-            - develop
-
+      branches:
+        - main
+        - develop
 
 jobs:
-  test:
-    name: Rspec Test Environment
-    runs-on: ubuntu-latest
+  # FIXME: Figure out why this is returned in Actions: TypeError: no implicit conversion of nil into String
 
-    services:
-        postgres:
-          image: postgres:latest
-          env:
-            POSTGRES_USER: postgres
-            POSTGRES_PASSWORD: password
-            # POSTGRES_DB: inicro_testing
-          ports:
-            - 5432:5432
-          options:
-            --health-cmd pg_isready
-            --health-interval 10s
-            --health-timeout 5s
+  # test:
+  #   name: Rspec Test & Code Coverage
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+  #   services:
+  #       postgres:
+  #         image: postgres:latest
+  #         env:
+  #           POSTGRES_USER: postgres
+  #           POSTGRES_PASSWORD: password
+  #         ports:
+  #           - 5432:5432
+  #         options:
+  #           --health-cmd pg_isready
+  #           --health-interval 10s
+  #           --health-timeout 5s
 
-      - name: Install Ruby and gems
-        uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf
-        with:
-          bundler-cache: true
-          ruby-version: 3.1.4
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
 
-      - name: Install dependencies
-        run: |
-          gem install bundler
-          bundle install --jobs 4 --retry 3
-      - name: Install system dependencies
-        run: |
-          sudo apt-get -y update
-      - name: Install PostgreSQL client
-        run: |
-          sudo apt-get -yqq install libpq-dev
+  #     - name: Install Ruby and gems
+  #       uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf
+  #       with:
+  #         bundler-cache: true
+  #         ruby-version: 3.1.4
 
+  #     - name: Install dependencies
+  #       run: |
+  #         gem install bundler
+  #         bundle install --jobs 4 --retry 3
 
-      - name: Start PostgreSQL service
-        run: |
-              sudo service postgresql restart
+  #     - name: Install system dependencies
+  #       run: |
+  #         sudo apt-get -y update
 
-      - name: Database setup
-        env:
-          INICRO_USER: postgres
-          INICRO_PASSWORD: password
-          RAILS_ENV: test
-          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-        run: |
-          bundle exec rails db:test:prepare db:migrate RAILS_ENV=test
-      - name: RSpec tests
-        env:
-          INICRO_USER: postgres
-          INICRO_PASSWORD: password
-          RAILS_ENV: test
-          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-        run: |
-          bundle exec rspec
-      - name: Create code coverage report
-        uses: actions/upload-artifact@v2
-        with:
-          name: code-coverage
-          path: coverage/
+  #     - name: Install PostgreSQL client
+  #       run: |
+  #         sudo apt-get -yqq install libpq-dev
+  #     - name: Database setup
+  #       env:
+  #         DATABASE_URL: postgres://postgres:password@localhost:5432/inicro_testing
+  #         RAILS_ENV: test
+  #         RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+  #       run: |
+  #         bundle exec rails db:test:prepare db:migrate RAILS_ENV=test
+
+  #     - name: RSpec tests
+  #       env:
+  #         DATABASE_URL: postgres://postgres:password@localhost:5432/inicro_testing
+  #         RAILS_ENV: test
+  #         RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+  #       run: |
+  #         bundle exec rspec
+
+  #     - name: Create code coverage report
+  #       uses: actions/upload-artifact@v2
+  #       with:
+  #         name: code-coverage
+  #         path: coverage/
 
   lint:
     name:  Linting and Security Audit

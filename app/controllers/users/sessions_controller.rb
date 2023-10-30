@@ -22,7 +22,7 @@ module Users
     end
 
     def log_out_success
-      render json: { message: "You've logged out successfully." }, status: :no_content
+      head :no_content
     end
 
     def log_out_failure

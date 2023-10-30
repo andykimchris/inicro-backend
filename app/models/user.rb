@@ -6,12 +6,13 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :omniauthable,
+         :omniauthable, :confirmable,
          :jwt_authenticatable, jwt_revocation_strategy: JwtDenylist
 
+  has_many :listings, -> { where is_proprietor: true }, dependent: :destroy, inverse_of: :user
+
   validates :email, presence: true, uniqueness: true
-  validates :is_proprietor, inclusion: { in: [true, false] }
-  validates :is_occupant, inclusion: { in: [true, false] }
+  validates :is_proprietor, :is_occupant, inclusion: { in: [true, false] }
 
   validate :either_proprietor_or_occupant
   validate :password_matcher
@@ -23,8 +24,7 @@ class User < ApplicationRecord
   def password_matcher
     return if password.match(PASSWORD_REGEX)
 
-    errors.add(:password,
-               'must include at least one lowercase letter, one uppercase letter, one digit, and one special character.')
+    errors.add(:password, 'must include at least one lowercase letter,one uppercase letter,one digit,and one special character.')
   end
 
   def either_proprietor_or_occupant

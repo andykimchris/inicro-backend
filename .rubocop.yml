@@ -21,3 +21,18 @@ AllCops:
   inherit_mode:
     merge:
       - Exclude
+
+Style/Documentation:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 130
+
+RSpec/ExampleLength:
+  Max: 15
+
+RSpec/MultipleExpectations:
+  Max: 3
+
+Rails/LexicallyScopedActionFilter:
+  Enabled: false

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_17_093312) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_25_195240) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -21,6 +21,37 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_17_093312) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["jti"], name: "index_jwt_denylist_on_jti"
+  end
+
+  create_table "listings", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "description", null: false
+    t.integer "size"
+    t.text "metadata"
+    t.integer "floor_count"
+    t.string "site_link"
+    t.integer "listing_type", default: 0, null: false
+    t.uuid "user_id", null: false
+    t.bigint "location_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_listings_on_location_id"
+    t.index ["user_id"], name: "index_listings_on_user_id"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description", null: false
+    t.float "latitude"
+    t.float "longitude"
+    t.string "address", null: false
+    t.string "city", null: false
+    t.string "state"
+    t.string "postal_code"
+    t.string "country"
+    t.string "tags"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -41,4 +72,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_17_093312) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "listings", "locations"
+  add_foreign_key "listings", "users"
 end
