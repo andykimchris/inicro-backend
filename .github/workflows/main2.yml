@@ -14,13 +14,9 @@ jobs:
     name: Rspec Test Environment
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        ruby-version: ["3.1", "3.2"]
-
     services:
       postgres:
-        image: postgres:12
+        image: postgres:latest
         env:
           POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
@@ -34,11 +30,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Ruby ${{ matrix.ruby-version }}
+      - name: Set up Ruby 3.1.4
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-          ruby-version: ${{ matrix.ruby-version }}
+          ruby-version: 3.1.4
 
       - name: Install dependencies
         run: |

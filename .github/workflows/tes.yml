@@ -20,7 +20,7 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
-          # POSTGRES_DB: inicro_testing
+          POSTGRES_DB: inicro_testing
         ports:
           - 5432:5432
         options: --health-cmd pg_isready
@@ -55,16 +55,16 @@ jobs:
 
       - name: Database setup
         env:
-          INICRO_USER: postgres
-          INICRO_PASSWORD: password
+          INICRO_USER: inicro
+          INICRO_PASSWORD: 15040mhs!
           RAILS_ENV: test
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
         run: |
           bundle exec rails db:test:prepare db:migrate RAILS_ENV=test
       - name: RSpec tests
         env:
-          INICRO_USER: postgres
-          INICRO_PASSWORD: password
+          INICRO_USER: inicro
+          INICRO_PASSWORD: 15040mhs!
           RAILS_ENV: test
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
         run: |

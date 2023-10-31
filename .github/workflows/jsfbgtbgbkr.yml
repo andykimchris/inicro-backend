@@ -16,14 +16,13 @@ jobs:
 
     services:
       postgres:
-        image: postgres:12
+        image: postgres:latest
         env:
           POSTGRES_USER: inicro
           POSTGRES_PASSWORD: 15040mhs!
         ports:
           - 5432:5432
-        options:
-          --health-cmd pg_isready
+        options: --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
 
@@ -50,7 +49,7 @@ jobs:
 
       - name: Start PostgreSQL service
         run: |
-            sudo service postgresql restart
+          sudo service postgresql restart
 
       - name: Log PostgreSQL server logs
         run: |
@@ -102,13 +101,13 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf
         with:
-            bundler-cache: true
-            ruby-version: 3.1.4
+          bundler-cache: true
+          ruby-version: 3.1.4
 
       - name: Install dependencies
         run: |
-            gem install bundler
-            bundle install --jobs 4 --retry 3
+          gem install bundler
+          bundle install --jobs 4 --retry 3
       - name: Security audit dependencies
         run: bundle exec bundler-audit --update
 
