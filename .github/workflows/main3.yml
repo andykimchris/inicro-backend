@@ -22,8 +22,7 @@ jobs:
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
         ports:
           - 5432:5432
-        options:
-          --health-cmd pg_isready
+        options: --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
 
@@ -34,8 +33,8 @@ jobs:
       - name: Set up Ruby 3.1.4
         uses: ruby/setup-ruby@v1
         with:
-            bundler-cache: true
-            ruby-version: 3.1.4
+          bundler-cache: true
+          ruby-version: 3.1.4
 
       - name: Install dependencies
         run: |
@@ -50,11 +49,11 @@ jobs:
 
       - name: Start PostgreSQL service
         run: |
-            sudo service postgresql restart
+          sudo service postgresql restart
 
       - name: Log PostgreSQL server logs
         run: |
-            sudo cat /var/log/postgresql/postgresql-14-main.log
+          sudo cat /var/log/postgresql/postgresql-14-main.log
 
       - name: Database setup
         env:
@@ -81,6 +80,7 @@ jobs:
 
           # Set PGHOST to force IPv4 connection
           export PGHOST=127.0.0.1
+          export PGPASSWORD=${{ secrets.POSTGRES_PASSWORD }}
 
           export PGPASSFILE=$GITHUB_WORKSPACE/.pgpass
           psql -h $PGHOST -U ${{ secrets.POSTGRES_USER }} -d inicro_testing -c 'SELECT version();'
@@ -110,13 +110,13 @@ jobs:
       - name: Set up Ruby 3.1.4
         uses: ruby/setup-ruby@v1
         with:
-            bundler-cache: true
-            ruby-version: 3.1.4
+          bundler-cache: true
+          ruby-version: 3.1.4
 
       - name: Install dependencies
         run: |
-            gem install bundler
-            bundle install --jobs 4 --retry 3
+          gem install bundler
+          bundle install --jobs 4 --retry 3
       - name: Security audit dependencies
         run: bundle exec bundler-audit --update
 
