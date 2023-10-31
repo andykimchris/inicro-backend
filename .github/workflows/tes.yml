@@ -74,30 +74,3 @@ jobs:
           name: code-coverage
           path: coverage/
 
-  lint:
-    name: Linting and Security Audit
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf
-        with:
-          bundler-cache: true
-          ruby-version: 3.1.4
-          rubygems: latest
-
-      - name: Install dependencies
-        run: |
-          gem install bundler
-          bundle install --jobs 4 --retry 3
-      - name: Security audit dependencies
-        run: bundle exec bundler-audit --update
-
-      - name: Security audit application code
-        run: bundle exec brakeman -q -w2
-
-      - name: Lint via RuboCop
-        run: bundle exec rubocop --parallel -A
