@@ -1,4 +1,4 @@
-name: Maria
+name: Maria 3333
 
 on:
   push:
@@ -82,7 +82,12 @@ jobs:
           echo "POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}"
 
           export PGPASSFILE=$GITHUB_WORKSPACE/.pgpass
-          psql -h localhost -U ${{ secrets.POSTGRES_USER }} -d inicro_testing -c 'SELECT version();'
+
+          # Set PGHOST to force IPv4 connection
+          export PGHOST=127.0.0.1
+
+          export PGPASSFILE=$GITHUB_WORKSPACE/.pgpass
+          psql -h $PGHOST -U ${{ secrets.POSTGRES_USER }} -d inicro_testing -c 'SELECT version();'
 
           bundle exec rails db:test:prepare db:migrate RAILS_ENV=test
       - name: RSpec tests
