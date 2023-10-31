@@ -1,4 +1,4 @@
-name: Andy 1
+name: Rails Backend CI/CD V1
 
 on:
   push:
@@ -18,8 +18,8 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          INICRO_USER: ${{ secrets.POSTGRES_USER }}
-          INICRO_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_USER: inicro
+          POSTGRES_PASSWORD: 15040mhs!
         ports:
           - 5432:5432
         options: --health-cmd pg_isready
@@ -52,35 +52,18 @@ jobs:
         run: |
           sudo service postgresql restart
 
-      - name: Log PostgreSQL server logs
-        run: |
-          sudo cat /var/log/postgresql/postgresql-14-main.log
-
       - name: Database setup
         env:
-          DATABASE_URL: postgres://inicro:15040mhs!@localhost:5432/inicro_testing
+          INICRO_USER: inicro
+          INICRO_PASSWORD: 15040mhs!
           RAILS_ENV: test
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
         run: |
-          echo "Debug: Printing Environment Variables"
-          echo "DATABASE_URL: $DATABASE_URL"
-          echo "RAILS_ENV: $RAILS_ENV"
-          echo "RAILS_MASTER_KEY: $RAILS_MASTER_KEY"
-          echo "POSTGRES $POSTGRES_USER $POSTGRES_PASSWORD"
-
-          echo "Debug: Checking PostgreSQL version"
-          psql --version
-
-          echo "Debug: Checking PostgreSQL service status"
-          service postgresql status
-
-          # echo "Debug: Checking PostgreSQL connectivity"
-          # psql -h localhost -U ${{ secrets.POSTGRES_USER }} -d inicro_testing -c 'SELECT version();'
-
           bundle exec rails db:test:prepare db:migrate RAILS_ENV=test
       - name: RSpec tests
         env:
-          DATABASE_URL: postgres://inicro:15040mhs!@localhost:5432/inicro_testing
+          INICRO_USER: inicro
+          INICRO_PASSWORD: 15040mhs!
           RAILS_ENV: test
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
         run: |

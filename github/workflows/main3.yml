@@ -1,4 +1,4 @@
-name: Maria
+name: Maria 3333
 
 on:
   push:
@@ -18,8 +18,8 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          INICRO_USER: ${{ secrets.POSTGRES_USER }}
-          INICRO_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
         ports:
           - 5432:5432
         options: --health-cmd pg_isready
@@ -79,7 +79,12 @@ jobs:
 
           export PGPASSFILE=$GITHUB_WORKSPACE/.pgpass
 
-          psql -h localhost -U ${{ secrets.POSTGRES_USER }} -d inicro_testing -c 'SELECT version();'
+          # Set PGHOST to force IPv4 connection
+          export PGHOST=127.0.0.1
+          export PGPASSWORD=${{ secrets.POSTGRES_PASSWORD }}
+
+          export PGPASSFILE=$GITHUB_WORKSPACE/.pgpass
+          psql -h $PGHOST -U ${{ secrets.POSTGRES_USER }} -d inicro_testing -c 'SELECT version();'
 
           bundle exec rails db:test:prepare db:migrate RAILS_ENV=test
       - name: RSpec tests
@@ -103,7 +108,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Ruby ${{ matrix.ruby-version }}
+      - name: Set up Ruby 3.1.4
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
