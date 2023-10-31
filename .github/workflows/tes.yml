@@ -36,6 +36,7 @@ jobs:
         with:
           bundler-cache: true
           ruby-version: 3.1.4
+          rubygems: latest
 
       - name: Install dependencies
         run: |
@@ -87,6 +88,7 @@ jobs:
         with:
           bundler-cache: true
           ruby-version: 3.1.4
+          rubygems: latest
 
       - name: Install dependencies
         run: |
