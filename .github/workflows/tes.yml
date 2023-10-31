@@ -18,8 +18,8 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_USER: inicro
-          POSTGRES_PASSWORD: 15040mhs!
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
         ports:
           - 5432:5432
         options: --health-cmd pg_isready
