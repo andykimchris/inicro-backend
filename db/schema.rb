@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_25_195240) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_30_171549) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -21,6 +21,26 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_25_195240) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["jti"], name: "index_jwt_denylist_on_jti"
+  end
+
+  create_table "listing_amenities", force: :cascade do |t|
+    t.boolean "onsite_parking"
+    t.boolean "gymnasium"
+    t.boolean "elevator"
+    t.boolean "security_cameras"
+    t.boolean "wheelchair_accessible"
+    t.boolean "generator"
+    t.boolean "borehole"
+    t.boolean "solar_panels"
+    t.boolean "swimming_pool"
+    t.boolean "rooftop"
+    t.boolean "salon"
+    t.boolean "mini_market"
+    t.text "metadata"
+    t.bigint "listing_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["listing_id"], name: "index_listing_amenities_on_listing_id"
   end
 
   create_table "listings", force: :cascade do |t|
@@ -72,6 +92,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_25_195240) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "listing_amenities", "listings"
   add_foreign_key "listings", "locations"
   add_foreign_key "listings", "users"
 end

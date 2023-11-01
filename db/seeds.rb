@@ -41,4 +41,15 @@ listing = Listing.create!(
   location_id: location.id
 )
 
+ListingAmenity.create!(
+  listing: listing,
+  onsite_parking: true,
+  gymnasium: false,
+  elevator: true,
+  security_cameras: false,
+  wheelchair_accessible: true,
+  generator: true,
+  borehole: false
+)
 
+puts "Created test data succesfully..."
