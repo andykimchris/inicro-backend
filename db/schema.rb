@@ -24,9 +24,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_01_203912) do
   end
 
   create_table "listing_amenities", force: :cascade do |t|
-    t.string "title"
+    t.string "title", null: false
     t.text "description"
-    t.boolean "is_available"
+    t.boolean "is_available", default: false
     t.text "metadata"
     t.integer "listing_type", default: 0, null: false
     t.bigint "listing_id", null: false
