@@ -17,7 +17,12 @@ class User < ApplicationRecord
   validate :either_proprietor_or_occupant
   validate :password_matcher
 
+  before_save :normalize_email_attr
   PASSWORD_REGEX = /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{8,}\z/
+
+  def normalize_email_attr
+    self.email = email.downcase if email
+  end
 
   private
 
