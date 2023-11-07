@@ -5,6 +5,18 @@ module Users
     before_action :configure_sign_in_params, only: [:create]
     respond_to :json
 
+    def create
+      user = User.find_by(email: params[:user][:email])
+
+      if user && user.confirmed_at.nil?
+        render json: { message: 'Please confirm your email before logging in.' }, status: :unauthorized
+      elsif user.nil?
+        render json: { message: 'The user does not exist' }, status: :unauthorized
+      else
+        super
+      end
+    end
+
     private
 
     def configure_sign_in_params
