@@ -39,6 +39,9 @@ storage/.keep
 /config/master.key
 /config/credentials.yml.enc
 
+# GCS Service Account key
+/config/secrets/*
+
 # Ignore test coverage reports
 /coverage.data
 /coverage/
@@ -49,3 +52,4 @@ storage/.keep
 .byebug_history
 
 .vscode
+\.DS_Store
