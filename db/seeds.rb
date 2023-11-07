@@ -4,18 +4,18 @@ require "faker"
 proprietor = User.create!(email: "andrew.muchiri97@gmail.com",
             password: "Johndoe123!", password_confirmation: 'Johndoe123!',
             is_occupant: false, is_proprietor: true,
-            confirmed_at: Time.now.utc)
+            confirmed_at: Time.now.utc, confirmation_token: SecureRandom.base64)
 
 # Occupants
 User.create!(email: Faker::Internet.email,
             password: "Johndoe123!", password_confirmation: 'Johndoe123!',
             is_occupant: true, is_proprietor: false,
-            confirmed_at: Time.now.utc)
+            confirmed_at: Time.now.utc, confirmation_token: SecureRandom.base64)
 
 User.create!(email: Faker::Internet.email,
             password: "Janedoe123!", password_confirmation: 'Janedoe123!',
             is_occupant: true, is_proprietor: false,
-            confirmed_at: Time.now.utc)
+            confirmed_at: Time.now.utc, confirmation_token: SecureRandom.base64)
 
 location = Location.create!(
   name: Faker::Address.street_name,
@@ -41,4 +41,4 @@ listing = Listing.create!(
   location_id: location.id
 )
 
-
+puts "Successfully seeded data"
