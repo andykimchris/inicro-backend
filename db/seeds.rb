@@ -1,5 +1,7 @@
 require "faker"
 
+include ActionDispatch::TestProcess
+
 # Proprietor
 proprietor = User.create!(email: "andrew.muchiri97@gmail.com",
             password: "Johndoe123!", password_confirmation: 'Johndoe123!',
@@ -28,7 +30,7 @@ location = Location.create!(
   country: Faker::Address.country
 )
 
-listing = Listing.create!(
+listing = Listing.new(
   user: proprietor,
   title: "Golden Heights Apartments",
   description: "Nestled within a peaceful neighborhood, this charming residential building exudes a warm and inviting ambiance,
@@ -38,7 +40,14 @@ listing = Listing.create!(
   metadata: "Also offers gym access and on-site car parking.",
   site_link: "https://example.com",
   listing_type: 0,
-  location_id: location.id
+  location: location
 )
+
+image_paths = ['public/images/listing-1.jpg', 'public/images/listing-2.jpg']
+image_paths.each do |image_path|
+  listing.images.attach(io: File.open(Rails.root.join(image_path)), filename: File.basename(image_path))
+end
+listing.save!
+
 
 puts "Successfully seeded data"
