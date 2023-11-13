@@ -34,3 +34,6 @@ RSpec/MultipleExpectations:
 
 Rails/LexicallyScopedActionFilter:
   Enabled: false
+
+Metrics/MethodLength:
+  Max: 20
