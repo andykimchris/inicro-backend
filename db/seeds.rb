@@ -41,4 +41,32 @@ listing = Listing.create!(
   location_id: location.id
 )
 
+ListingAmenity.create!(
+  listing: listing,
+  title: "Security Cameras",
+  description: Faker::Lorem.paragraph,
+  metadata: "There are surveillance cameras also on all corridors, staircases & elevators.",
+  is_available: true,
+  listing_type: 1,
+)
 
+ListingAmenity.create!(
+  listing: listing,
+  title: "Gymnasium",
+  description: Faker::Lorem.paragraph,
+  metadata: "They have free & pro plans for 1 month & 3 months.",
+  is_available: false,
+  listing_type: 1,
+)
+
+ListingAmenity.create!(
+  listing: listing,
+  title: "Solar panels",
+  description: Faker::Lorem.paragraph,
+  metadata: "They support water heaters.",
+  is_available: true,
+  listing_type: 0,
+)
+
+
+puts "Created seed data succesfully..."

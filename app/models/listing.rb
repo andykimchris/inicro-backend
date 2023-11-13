@@ -3,6 +3,7 @@
 class Listing < ApplicationRecord
   belongs_to :user, class_name: 'User', primary_key: 'id', inverse_of: :listings
   has_one :location, dependent: :destroy
+  has_many :listing_amenities, class_name: 'ListingAmenity', dependent: :destroy
 
   enum listing_type: { residential: 0, commercial: 1, land: 2 }
 

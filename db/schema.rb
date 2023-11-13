@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_25_195240) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_01_203912) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -21,6 +21,18 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_25_195240) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["jti"], name: "index_jwt_denylist_on_jti"
+  end
+
+  create_table "listing_amenities", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "description"
+    t.boolean "is_available", default: false
+    t.text "metadata"
+    t.integer "listing_type", default: 0, null: false
+    t.bigint "listing_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["listing_id"], name: "index_listing_amenities_on_listing_id"
   end
 
   create_table "listings", force: :cascade do |t|
@@ -72,6 +84,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_25_195240) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "listing_amenities", "listings"
   add_foreign_key "listings", "locations"
   add_foreign_key "listings", "users"
 end
