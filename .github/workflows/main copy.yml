@@ -1,4 +1,4 @@
-name: Rails Backend CI/CD
+name: Rails Backend CI/CD 2
 
 on:
     push:
@@ -22,7 +22,7 @@ jobs:
           image: postgres:latest
           env:
             POSTGRES_USER: postgres
-            POSTGRES_PASSWORD: password
+            POSTGRES_PASSWORD: postgres
           ports:
             - 5432:5432
           options:
@@ -54,7 +54,7 @@ jobs:
           sudo apt-get -yqq install libpq-dev
       - name: Database setup
         env:
-          DATABASE_URL: postgres://postgres:password@localhost:5432/inicro_testing
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/inicro_testing
           RAILS_ENV: test
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
         run: |
@@ -62,7 +62,7 @@ jobs:
 
       - name: RSpec tests
         env:
-          DATABASE_URL: postgres://postgres:password@localhost:5432/inicro_testing
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/inicro_testing
           RAILS_ENV: test
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
         run: |
