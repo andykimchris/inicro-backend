@@ -58,6 +58,30 @@ jobs:
           RAILS_ENV: test
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
         run: |
+          # echo "Debug: Printing Environment Variables"
+          # echo "DATABASE_URL: $DATABASE_URL"
+          # echo "RAILS_ENV: $RAILS_ENV"
+          # echo "RAILS_MASTER_KEY: $RAILS_MASTER_KEY"
+
+          # echo "Debug: Checking PostgreSQL version"
+          # psql --version
+
+          # echo "Debug: Checking PostgreSQL service status"
+          # service postgresql status
+
+          # echo "Debug: Checking PostgreSQL connectivity"
+          # echo "POSTGRES_USER: ${{ secrets.POSTGRES_USER }}"
+          # echo "POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}"
+
+          # export PGPASSFILE=$GITHUB_WORKSPACE/.pgpass
+
+          # # Set PGHOST to force IPv4 connection
+          # export PGHOST=127.0.0.1
+          # export PGPASSWORD=${{ secrets.POSTGRES_PASSWORD }}
+
+          # export PGPASSFILE=$GITHUB_WORKSPACE/.pgpass
+          # psql -h $PGHOST -U ${{ secrets.POSTGRES_USER }} -d inicro_testing -c 'SELECT version();'
+
           bundle exec rails db:test:prepare db:migrate RAILS_ENV=test
 
       - name: RSpec tests
