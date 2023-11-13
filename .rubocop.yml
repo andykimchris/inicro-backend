@@ -32,6 +32,9 @@ RSpec/ExampleLength:
 RSpec/MultipleExpectations:
   Max: 3
 
+RSpec/NestedGroups:
+  Max: 4
+
 Rails/LexicallyScopedActionFilter:
   Enabled: false
 
