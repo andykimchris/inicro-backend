@@ -59,12 +59,12 @@ jobs:
       - name: Database setup
         env:
           DATABASE_URL: postgres://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@localhost:5432/inicro_testing
-        #   RAILS_ENV: test
-        #   RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-        #   POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
-        #   POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-        #   INICRO_USER: ${{ secrets.POSTGRES_USER }}
-        #   INICRO_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          RAILS_ENV: test
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          INICRO_USER: ${{ secrets.POSTGRES_USER }}
+          INICRO_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
 
         run: |
           # echo "Debug: Printing Environment Variables"
