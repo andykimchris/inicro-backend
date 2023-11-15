@@ -13,66 +13,66 @@ on:
 jobs:
   # FIXME: Rspec is failing
 
-  # test:
-  #   name: Rspec Test & Code Coverage
-  #   runs-on: ubuntu-latest
+  test:
+    name: Rspec Test & Code Coverage
+    runs-on: ubuntu-latest
 
-  #   services:
-  #       postgres:
-  #         image: postgres:latest
-  #         env:
-  #           POSTGRES_USER: postgres
-  #           POSTGRES_PASSWORD: password
-  #         ports:
-  #           - 5432:5432
-  #         options:
-  #           --health-cmd pg_isready
-  #           --health-interval 10s
-  #           --health-timeout 5s
+    services:
+        postgres:
+          image: postgres:latest
+          env:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: password
+          ports:
+            - 5432:5432
+          options:
+            --health-cmd pg_isready
+            --health-interval 10s
+            --health-timeout 5s
 
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v3
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-  #     - name: Install Ruby and gems
-  #       uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf
-  #       with:
-  #         bundler-cache: true
-  #         ruby-version: 3.2.2
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf
+        with:
+          bundler-cache: true
+          ruby-version: 3.2.2
 
-  #     - name: Install dependencies
-  #       run: |
-  #         gem install bundler
-  #         bundle install --jobs 4 --retry 3
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle install --jobs 4 --retry 3
 
-  #     - name: Install system dependencies
-  #       run: |
-  #         sudo apt-get -y update
+      - name: Install system dependencies
+        run: |
+          sudo apt-get -y update
 
-  #     - name: Install PostgreSQL client
-  #       run: |
-  #         sudo apt-get -yqq install libpq-dev
-  #     - name: Database setup
-  #       env:
-  #         DATABASE_URL: postgres://postgres:password@localhost:5432/inicro_testing
-  #         RAILS_ENV: test
-  #         RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-  #       run: |
-  #         bundle exec rails db:test:prepare db:migrate RAILS_ENV=test
+      - name: Install PostgreSQL client
+        run: |
+          sudo apt-get -yqq install libpq-dev
+      - name: Database setup
+        env:
+          DATABASE_URL: postgres://postgres:password@localhost:5432/inicro_testing
+          RAILS_ENV: test
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+        run: |
+          bundle exec rails db:test:prepare db:migrate RAILS_ENV=test
 
-  #     - name: RSpec tests
-  #       env:
-  #         DATABASE_URL: postgres://postgres:password@localhost:5432/inicro_testing
-  #         RAILS_ENV: test
-  #         RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-  #       run: |
-  #         bundle exec rspec
+      - name: RSpec tests
+        env:
+          DATABASE_URL: postgres://postgres:password@localhost:5432/inicro_testing
+          RAILS_ENV: test
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+        run: |
+          bundle exec rspec
 
-  #     - name: Create code coverage report
-  #       uses: actions/upload-artifact@v2
-  #       with:
-  #         name: code-coverage
-  #         path: coverage/
+      - name: Create code coverage report
+        uses: actions/upload-artifact@v2
+        with:
+          name: code-coverage
+          path: coverage/
 
   lint:
     name:  Linting and Security Audit

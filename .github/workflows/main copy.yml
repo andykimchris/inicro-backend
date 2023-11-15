@@ -11,92 +11,91 @@ on:
         - develop
 
 jobs:
-  # FIXME: Figure out why this is returned in Actions: TypeError: no implicit conversion of nil into String
 
-  # test:
-  #   name: Rspec Test & Code Coverage
-  #   runs-on: ubuntu-latest
+  test:
+    name: Rspec Test & Code Coverage
+    runs-on: ubuntu-latest
 
-  #   services:
-  #       postgres:
-  #         image: postgres:latest
-  #         env:
-  #           POSTGRES_USER: postgres
-  #           POSTGRES_PASSWORD: postgres
-  #         ports:
-  #           - 5432:5432
-  #         options:
-  #           --health-cmd pg_isready
-  #           --health-interval 10s
-  #           --health-timeout 5s
+    services:
+        postgres:
+          image: postgres:latest
+          env:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+          ports:
+            - 5432:5432
+          options:
+            --health-cmd pg_isready
+            --health-interval 10s
+            --health-timeout 5s
 
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v3
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-  #     - name: Install Ruby and gems
-  #       uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf
-  #       with:
-  #         bundler-cache: true
-  #         ruby-version: 3.2.2
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf
+        with:
+          bundler-cache: true
+          ruby-version: 3.2.2
 
-  #     - name: Install dependencies
-  #       run: |
-  #         gem install bundler
-  #         bundle install --jobs 4 --retry 3
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle install --jobs 4 --retry 3
 
-  #     - name: Install system dependencies
-  #       run: |
-  #         sudo apt-get -y update
+      - name: Install system dependencies
+        run: |
+          sudo apt-get -y update
 
-  #     - name: Install PostgreSQL client
-  #       run: |
-  #         sudo apt-get -yqq install libpq-dev
-  #     - name: Database setup
-  #       env:
-  #         DATABASE_URL: postgres://postgres:postgres@localhost:5432/inicro_testing
-  #         RAILS_ENV: test
-  #         RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-  #       run: |
-  #         # echo "Debug: Printing Environment Variables"
-  #         # echo "DATABASE_URL: $DATABASE_URL"
-  #         # echo "RAILS_ENV: $RAILS_ENV"
-  #         # echo "RAILS_MASTER_KEY: $RAILS_MASTER_KEY"
+      - name: Install PostgreSQL client
+        run: |
+          sudo apt-get -yqq install libpq-dev
+      - name: Database setup
+        env:
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/inicro_testing
+          RAILS_ENV: test
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+        run: |
+          # echo "Debug: Printing Environment Variables"
+          # echo "DATABASE_URL: $DATABASE_URL"
+          # echo "RAILS_ENV: $RAILS_ENV"
+          # echo "RAILS_MASTER_KEY: $RAILS_MASTER_KEY"
 
-  #         # echo "Debug: Checking PostgreSQL version"
-  #         # psql --version
+          # echo "Debug: Checking PostgreSQL version"
+          # psql --version
 
-  #         # echo "Debug: Checking PostgreSQL service status"
-  #         # service postgresql status
+          # echo "Debug: Checking PostgreSQL service status"
+          # service postgresql status
 
-  #         # echo "Debug: Checking PostgreSQL connectivity"
-  #         # echo "POSTGRES_USER: ${{ secrets.POSTGRES_USER }}"
-  #         # echo "POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}"
+          # echo "Debug: Checking PostgreSQL connectivity"
+          # echo "POSTGRES_USER: ${{ secrets.POSTGRES_USER }}"
+          # echo "POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}"
 
-  #         # export PGPASSFILE=$GITHUB_WORKSPACE/.pgpass
+          # export PGPASSFILE=$GITHUB_WORKSPACE/.pgpass
 
-  #         # # Set PGHOST to force IPv4 connection
-  #         # export PGHOST=127.0.0.1
-  #         # export PGPASSWORD=${{ secrets.POSTGRES_PASSWORD }}
+          # # Set PGHOST to force IPv4 connection
+          # export PGHOST=127.0.0.1
+          # export PGPASSWORD=${{ secrets.POSTGRES_PASSWORD }}
 
-  #         # export PGPASSFILE=$GITHUB_WORKSPACE/.pgpass
-  #         # psql -h $PGHOST -U ${{ secrets.POSTGRES_USER }} -d inicro_testing -c 'SELECT version();'
+          # export PGPASSFILE=$GITHUB_WORKSPACE/.pgpass
+          # psql -h $PGHOST -U ${{ secrets.POSTGRES_USER }} -d inicro_testing -c 'SELECT version();'
 
-  #         bundle exec rails db:test:prepare db:migrate RAILS_ENV=test
+          bundle exec rails db:test:prepare db:migrate RAILS_ENV=test
 
-  #     - name: RSpec tests
-  #       env:
-  #         DATABASE_URL: postgres://postgres:postgres@localhost:5432/inicro_testing
-  #         RAILS_ENV: test
-  #         RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-  #       run: |
-  #         bundle exec rspec
+      - name: RSpec tests
+        env:
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/inicro_testing
+          RAILS_ENV: test
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+        run: |
+          bundle exec rspec
 
-  #     - name: Create code coverage report
-  #       uses: actions/upload-artifact@v2
-  #       with:
-  #         name: code-coverage
-  #         path: coverage/
+      - name: Create code coverage report
+        uses: actions/upload-artifact@v2
+        with:
+          name: code-coverage
+          path: coverage/
 
   lint:
     name:  Linting and Security Audit
