@@ -52,6 +52,11 @@ jobs:
       - name: Install PostgreSQL client
         run: |
           sudo apt-get -yqq install libpq-dev
+
+      - name: Install Vips image variant
+        run: |
+          sudo apt-get install libvips
+
       - name: Database setup
         env:
           DATABASE_URL: postgres://postgres:password@localhost:5432/inicro_testing
