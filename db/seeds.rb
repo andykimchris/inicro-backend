@@ -3,7 +3,7 @@ require "faker"
 include ActionDispatch::TestProcess
 
 # Proprietor
-proprietor = User.create!(email: "andrew.muchiri97@gmail.com",
+proprietor = User.create!(email: Faker::Internet.email,
             password: "Johndoe123!", password_confirmation: 'Johndoe123!',
             is_occupant: false, is_proprietor: true,
             confirmed_at: Time.now.utc, confirmation_token: SecureRandom.base64)
@@ -43,7 +43,7 @@ listing = Listing.new(
   location: location
 )
 
-image_paths = ['public/images/listing-1.jpg', 'public/images/listing-2.jpg']
+image_paths = ['spec/factories/media/images/listing-1.jpg', 'spec/factories/media/images/listing-2.jpg']
 image_paths.each do |image_path|
   listing.images.attach(io: File.open(Rails.root.join(image_path)), filename: File.basename(image_path))
 end
