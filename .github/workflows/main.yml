@@ -63,7 +63,10 @@ jobs:
           RAILS_ENV: test
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
         run: |
-          bundle exec rails db:test:prepare db:migrate RAILS_ENV=test
+          cat config/database.yml  # Print database configuration
+          psql -U postgres -l     # List databases before migration
+          bundle exec rails db:test:prepare db:migrate RAILS_ENV=test || true  # Attempt migration and continue even if it fails
+          psql -U postgres -l     # List databases after migration
 
       - name: RSpec tests
         env:

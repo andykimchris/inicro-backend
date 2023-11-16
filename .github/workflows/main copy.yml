@@ -86,7 +86,8 @@ jobs:
           # export PGPASSFILE=$GITHUB_WORKSPACE/.pgpass
           # psql -h $PGHOST -U ${{ secrets.POSTGRES_USER }} -d inicro_testing -c 'SELECT version();'
 
-          bundle exec rails db:test:prepare db:migrate RAILS_ENV=test
+          # bundle exec rails db:test:prepare db:migrate RAILS_ENV=test
+          bundle exec rails db:setup
 
       - name: RSpec tests
         env:
