@@ -15,8 +15,8 @@ FactoryBot.define do
     email { Faker::Internet.email }
     password { 'Johndoe123&' }
     password_confirmation { 'Johndoe123&' }
-    is_occupant { false }
-    is_proprietor { true }
+    is_occupant { true }
+    is_proprietor { false }
     confirmed_at { Time.zone.now }
     confirmation_token { SecureRandom.hex }
   end

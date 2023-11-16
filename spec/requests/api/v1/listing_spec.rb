@@ -35,10 +35,10 @@ RSpec.describe 'Api::V1::Listings' do
     end
 
     context 'when attempting to create a listing as occupant' do
-      let(:proprietor_user) { create_occupant_user }
+      let(:occupant_user) { create_occupant_user }
 
       before do
-        post login_url, params: { user: { email: proprietor_user.email, password: proprietor_user.password } }
+        post login_url, params: { user: { email: occupant_user.email, password: occupant_user.password } }
         image_path = Rails.root.join('spec/factories/media/images/listing-1.jpg')
         listing_params = attributes_for(:listing, location_id: location.id,
                                                   images: [fixture_file_upload(image_path, 'image/jpg')])
