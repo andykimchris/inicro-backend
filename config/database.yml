@@ -1,7 +1,7 @@
 default: &default
   adapter: postgresql
-  username: postgres
-  password: password
+  username: <%= ENV["INICRO_USER"] %>
+  password: <%= ENV["INICRO_PASSWORD"] %>
   encoding: unicode
   pool: 5
   timeout: 5000
@@ -17,7 +17,7 @@ test:
 
 production:
   <<: *default
-  username: <%= ENV.fetch("INICRO_PROD_USER") %>
-  password: <%= ENV.fetch("INICRO_PROD_PASSWORD") %>
-  host: <%= ENV.fetch("INICRO_PROD_HOST") %>
-  port: <%= ENV.fetch("INICRO_PROD_PORT") %>
+  username: <%= ENV["INICRO_PROD_USER"] %>
+  password: <%= ENV["INICRO_PROD_PASSWORD"] %>
+  host: <%= ENV["INICRO_PROD_HOST"] %>
+  port: <%= ENV["INICRO_PROD_PORT"] %>
