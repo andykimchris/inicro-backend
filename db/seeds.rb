@@ -1,21 +1,23 @@
 require "faker"
 
+include ActionDispatch::TestProcess
+
 # Proprietor
-proprietor = User.create!(email: "andrew.muchiri97@gmail.com",
+proprietor = User.create!(email: Faker::Internet.email,
             password: "Johndoe123!", password_confirmation: 'Johndoe123!',
             is_occupant: false, is_proprietor: true,
-            confirmed_at: Time.now.utc)
+            confirmed_at: Time.now.utc, confirmation_token: SecureRandom.base64)
 
 # Occupants
 User.create!(email: Faker::Internet.email,
             password: "Johndoe123!", password_confirmation: 'Johndoe123!',
             is_occupant: true, is_proprietor: false,
-            confirmed_at: Time.now.utc)
+            confirmed_at: Time.now.utc, confirmation_token: SecureRandom.base64)
 
 User.create!(email: Faker::Internet.email,
             password: "Janedoe123!", password_confirmation: 'Janedoe123!',
             is_occupant: true, is_proprietor: false,
-            confirmed_at: Time.now.utc)
+            confirmed_at: Time.now.utc, confirmation_token: SecureRandom.base64)
 
 location = Location.create!(
   name: Faker::Address.street_name,
@@ -28,7 +30,7 @@ location = Location.create!(
   country: Faker::Address.country
 )
 
-listing = Listing.create!(
+listing = Listing.new(
   user: proprietor,
   title: "Golden Heights Apartments",
   description: "Nestled within a peaceful neighborhood, this charming residential building exudes a warm and inviting ambiance,
@@ -38,8 +40,14 @@ listing = Listing.create!(
   metadata: "Also offers gym access and on-site car parking.",
   site_link: "https://example.com",
   listing_type: 0,
-  location_id: location.id
+  location: location
 )
+
+image_paths = ['spec/factories/media/images/listing-1.jpg', 'spec/factories/media/images/listing-2.jpg']
+image_paths.each do |image_path|
+  listing.images.attach(io: File.open(Rails.root.join(image_path)), filename: File.basename(image_path))
+end
+listing.save!
 
 ListingAmenity.create!(
   listing: listing,
@@ -68,5 +76,4 @@ ListingAmenity.create!(
   listing_type: 0,
 )
 
-
-puts "Created seed data succesfully..."
+puts "Successfully seeded data"

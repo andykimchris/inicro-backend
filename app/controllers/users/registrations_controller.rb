@@ -22,7 +22,7 @@ module Users
     end
 
     def register_success_registration
-      render json: { message: "You've signed up sucessfully.", user: current_user }, status: :created
+      render json: { message: "You've signed up successfully." }, status: :created
     end
 
     def register_success_deletion

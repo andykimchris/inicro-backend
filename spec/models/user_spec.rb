@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe User do
   context 'when validating proprietor vs occupant information' do
     it 'creates a valid user when one is true and the other is false' do
-      user = create_user
+      user = create_proprietor_user
       expect(user).to be_valid
     end
 
@@ -24,7 +24,7 @@ RSpec.describe User do
 
   context 'when validating user password' do
     it 'creates a valid user when password & password confirmation match' do
-      user = create_user
+      user = create_proprietor_user
       expect(user).to be_valid
     end
 

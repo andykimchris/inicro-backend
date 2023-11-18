@@ -3,13 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe 'Sessions' do
-  let(:user) { create_user }
+  let(:proprietor_user) { create_proprietor_user }
   let(:login_url) { '/users/login' }
   let(:logout_url) { '/users/logout' }
 
   context 'when logging in a user' do
     before do
-      post login_url, params: { user: { email: user.email, password: user.password } }
+      post login_url, params: { user: { email: proprietor_user.email, password: proprietor_user.password } }
     end
 
     it 'returns ok (200)' do
@@ -23,7 +23,7 @@ RSpec.describe 'Sessions' do
 
   context 'when password or email is missing' do
     before do
-      post login_url, params: { user: { email: user.email } }
+      post login_url, params: { user: { email: proprietor_user.email } }
     end
 
     it 'returns unauthorized (401)' do

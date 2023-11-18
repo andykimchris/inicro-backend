@@ -6,10 +6,10 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :omniauthable, :confirmable,
+         :confirmable,
          :jwt_authenticatable, jwt_revocation_strategy: JwtDenylist
 
-  has_many :listings, -> { where is_proprietor: true }, dependent: :destroy, inverse_of: :user
+  has_many :listings, dependent: :destroy, inverse_of: :user
 
   validates :email, presence: true, uniqueness: true
   validates :is_proprietor, :is_occupant, inclusion: { in: [true, false] }
@@ -17,7 +17,12 @@ class User < ApplicationRecord
   validate :either_proprietor_or_occupant
   validate :password_matcher
 
+  before_save :normalize_email_attr
   PASSWORD_REGEX = /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{8,}\z/
+
+  def normalize_email_attr
+    self.email = email.downcase if email
+  end
 
   private
 
