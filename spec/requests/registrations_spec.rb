@@ -16,15 +16,11 @@ RSpec.describe 'Registrations' do
     end
 
     it 'returns created (201)' do
-      puts "Response status: #{response.status}"
-      Rails.logger.info "Response status 2: #{response.status}"
       expect(response).to have_http_status :created
     end
 
     it 'returns a success message' do
       json_response = response.parsed_body
-      puts "Response body: #{json_response}"
-      Rails.logger.info "Response body 2: #{json_response}"
       expect(json_response['message']).to eq("You've signed up successfully.")
     end
   end
@@ -39,7 +35,6 @@ RSpec.describe 'Registrations' do
     end
 
     it 'returns unprocessable entity (422)' do
-      puts "Response status: #{response.status}"
       expect(response).to have_http_status :unprocessable_entity
     end
   end

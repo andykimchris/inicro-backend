@@ -6,7 +6,7 @@ FactoryBot.define do
     description { 'Lorem Ipsum' }
     size { 10 }
     metadata { 'Extra details about the listing' }
-    floor_count { 1 }
+    floor_count { 3 }
     listing_type { 0 }
     location { association(:location) }
     user { association(:proprietor_user) }
