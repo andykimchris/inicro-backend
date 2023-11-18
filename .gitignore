@@ -40,6 +40,9 @@ storage/.keep
 # GCS Service Account key
 /config/secrets/*
 
+# GCS Service Account key
+/config/secrets/*
+
 # Ignore test coverage reports
 /coverage.data
 /coverage/
