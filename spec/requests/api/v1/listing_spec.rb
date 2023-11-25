@@ -3,14 +3,52 @@
 require 'rails_helper'
 
 RSpec.describe 'Api::V1::Listings' do
-  include ListingHelpers
+  let(:listing) { create_listing }
+  let(:location) { create_location }
+
+  describe 'GET /listing' do
+    context 'when showing a listing' do
+      let(:show_listing_url) { "/api/v1/listing/#{listing.id}" }
+
+      context 'with valid listing ID' do
+        before do
+          get show_listing_url
+        end
+
+        it 'returns a successful response' do
+          expect(response).to have_http_status(:ok)
+        end
+
+        it 'returns the requested listing' do
+          expect(listing).to be_valid
+
+          json_response = response.parsed_body
+          expect(json_response).to have_key('listing')
+          expect(json_response['listing']['id']).to eq(listing.id)
+        end
+      end
+
+      context 'with invalid listing ID' do
+        let(:show_listing_url) { '/api/v1/listing/:id' }
+
+        before do
+          get show_listing_url, params: { id: 'invalid_id' }
+        end
+
+        it 'returns a not found (404) status' do
+          expect(response).to have_http_status(:not_found)
+        end
+
+        it 'returns an error message for listing not found' do
+          expect(response.parsed_body['error']).to eq('Listing not found')
+        end
+      end
+    end
+  end
 
   describe 'POST /listings' do
-    let(:listing) { create_listing }
-    let(:location) { create_location }
-
-    let(:login_url) { '/users/login/' }
     let(:create_listing_url) { '/api/v1/listing/' }
+    let(:login_url) { '/users/login/' }
 
     context 'when creating a listing as an authenticated proprietor' do
       let(:proprietor_user) { create_proprietor_user }
@@ -52,7 +90,7 @@ RSpec.describe 'Api::V1::Listings' do
     end
   end
 
-  describe 'PUT /listings' do
+  describe 'PUT /listing' do
     let(:location) { create_location }
     let(:update_listing_url) { "/api/v1/listing/#{listing.id}" }
 
@@ -61,7 +99,7 @@ RSpec.describe 'Api::V1::Listings' do
       let(:listing) { create_listing }
 
       it 'returns unauthorized (401) status' do
-        put update_listing_url, params: { id: listing.id, title: 'New Title' }
+        put update_listing_url, params: { title: 'New Title' }
         expect(response).to have_http_status(:unauthorized)
       end
     end

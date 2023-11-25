@@ -3,7 +3,7 @@
 module Api
   module V1
     class ListingController < ApplicationController
-      before_action :authenticate_user!
+      before_action :authenticate_user!, except: :show
       before_action :user_must_be_proprietor, only: %i[create update]
 
       def show
@@ -44,12 +44,6 @@ module Api
 
       def listing_params
         params.permit(:id, :title, :description, :size, :metadata, :floor_count, :site_link, :location_id, images: [])
-      end
-
-      def find_listing
-        @listing = Listing.find(params[:id])
-      rescue ActiveRecord::RecordNotFound
-        render json: { error: 'Listing not found' }, status: :not_found
       end
 
       def user_must_be_proprietor
