@@ -17,7 +17,7 @@ test:
 
 production:
   <<: *default
-  username: <%= ENV["INICRO_PROD_USER"] %>
-  password: <%= ENV["INICRO_PROD_PASSWORD"] %>
-  host: <%= ENV["INICRO_PROD_HOST"] %>
-  port: <%= ENV["INICRO_PROD_PORT"] %>
+  username: Rails.application.credentials.inicro_prod_user
+  password: Rails.application.credentials.inicro_prod_password
+  host: Rails.application.credentials.inicro_prod_host
+  port: Rails.application.credentials.inicro_prod_port
