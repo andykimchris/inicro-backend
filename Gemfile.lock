@@ -120,10 +120,6 @@ GEM
     digest-crc (0.6.5)
       rake (>= 12.0.0, < 14.0.0)
     docile (1.4.0)
-    dotenv (2.8.1)
-    dotenv-rails (2.8.1)
-      dotenv (= 2.8.1)
-      railties (>= 3.2)
     drb (2.2.0)
       ruby2_keywords
     dry-auto_inject (1.0.1)
@@ -135,6 +131,7 @@ GEM
     dry-core (1.0.1)
       concurrent-ruby (~> 1.0)
       zeitwerk (~> 2.6)
+    error_highlight (0.5.1)
     erubi (1.12.0)
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
@@ -433,7 +430,7 @@ DEPENDENCIES
   debug
   devise (~> 4.9)
   devise-jwt
-  dotenv-rails
+  error_highlight (>= 0.4.0)
   factory_bot_rails
   faker
   google-cloud-storage (~> 1.11)
