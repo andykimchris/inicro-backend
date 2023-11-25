@@ -21,6 +21,12 @@ Devise.setup do |config|
   # config.parent_controller = 'DeviseController'
 
   config.jwt do |jwt|
+    p "TESTING_CREDS: #{Rails.application.credentials.base_url}"
+    p "TESTING_CREDS: #{Rails.application.credentials.base_mail_sender}"
+    p "TESTING_CREDS: #{Rails.application.credentials.dig(:gmail, :username)}"
+    p "TESTING_CREDS: #{ENV["RAILS_ENV"]}"
+    p "TESTING_CREDS: #{Rails.application.credentials.devise}"
+
     jwt.secret = Rails.application.credentials.devise[:jwt_secret_key]
     warn('warning: jwt.secret can not be nil') if jwt.secret.nil?
 
