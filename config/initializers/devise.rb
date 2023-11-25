@@ -21,7 +21,7 @@ Devise.setup do |config|
   # config.parent_controller = 'DeviseController'
 
   config.jwt do |jwt|
-    jwt.secret = ENV["JWT_SECRET_KEY"]
+    jwt.secret = Rails.application.credentials.devise[:jwt_secret_key]
     warn('warning: jwt.secret can not be nil') if jwt.secret.nil?
 
     jwt.dispatch_requests = [
@@ -39,7 +39,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = ENV["BASE_MAIL_SENDER"]
+  config.mailer_sender = Rails.application.credentials.base_mail_sender
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
