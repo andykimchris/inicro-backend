@@ -44,19 +44,6 @@ jobs:
           gem install bundler
           bundle install --jobs 4 --retry 3
 
-      - name: Set up environment variables for development
-        env:
-          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-          BASE_URL: ${{ secrets.BASE_URL }}
-          BASE_MAIL_SENDER: ${{ secrets.BASE_MAIL_SENDER }}
-          JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
-          INICRO_PROD_USER: ${{ secrets.INICRO_PROD_USER }}
-          INICRO_PROD_PASSWORD: ${{ secrets.INICRO_PROD_PASSWORD }}
-          INICRO_PROD_HOST: ${{ secrets.INICRO_PROD_HOST }}
-          INICRO_PROD_PORT: ${{ secrets.INICRO_PROD_PORT }}
-        run: |
-          # Command to set up environment variables
-
       - name: Install system dependencies
         run: |
           sudo apt-get -y update
@@ -70,6 +57,10 @@ jobs:
           sudo apt-get install libvips
 
       - name: Database setup
+        env:
+          DATABASE_URL: postgres://postgres:password@localhost:5432/inicro_testing
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY_TEST }}
+          RAILS_ENV: test
         run: |
           bundle exec rails db:test:prepare db:migrate
 
