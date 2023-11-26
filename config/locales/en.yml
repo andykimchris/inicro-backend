@@ -28,4 +28,20 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  activerecord:
+    errors:
+      models:
+        listing:
+          attributes:
+            site_link:
+              site_link_format: "must start with 'https://' and be a valid URL"
+
+  errors:
+    messages:
+      content_type_invalid: "The content type %{content_type} is invalid. Please upload any of the following content types %{authorized_types}."
+      file_size_not_less_than_or_equal_to: "file size must be less than or equal to %{max_size} (current size is %{file_size})"
+      limit_out_of_range: "total number is out of range"
+      image_metadata_missing: "is not a valid image"
+      aspect_ratio_not_portrait: "must be a portrait image"
+      aspect_ratio_not_landscape: "must be a landscape image"
+      image_not_processable: "is not a valid image"

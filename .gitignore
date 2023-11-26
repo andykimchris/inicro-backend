@@ -7,17 +7,14 @@
 # Ignore bundler config.
 /.bundle
 
-# Ignore all environment files (except templates).
-/.env*
-!/.env*.erb
-
-.keep*
-
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+
+.keep*
+/test/.keep*
 
 # Ignore pidfiles, but keep the directory.
 /tmp/pids/*
@@ -30,6 +27,28 @@
 /tmp/storage/*
 !/tmp/storage/
 !/tmp/storage/.keep
+tmp/storage/.keep
+tmp/pids/.keep
+storage/.keep
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+/config/credentials/production.key
+/config/credentials/test.key
+/config/credentials/development.key
+
+# GCS Service Account key
+/config/secrets/*
+
+# Ignore test coverage reports
+/coverage.data
+/coverage/
+
+# RubyMine project files
+.idea
+
+.byebug_history
+
+.vscode
+\.DS_Store
+

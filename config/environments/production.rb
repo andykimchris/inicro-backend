@@ -30,7 +30,7 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = "X-Accel-Redirect" # for NGINX
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :local
+  config.active_storage.service = :google
 
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
@@ -64,7 +64,8 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "devise_vue_production"
 
-  config.action_mailer.default_url_options = { host: ENV['BASE_URL']}
+  config.action_mailer.default_url_options = { host: Rails.application.credentials.base_url
+}
   config.action_mailer.perform_caching = false
 
   # Ignore bad email addresses and do not raise email delivery errors.

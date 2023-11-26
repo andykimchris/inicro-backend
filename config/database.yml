@@ -1,0 +1,23 @@
+default: &default
+  adapter: postgresql
+  username: postgres
+  password: password
+  encoding: unicode
+  pool: 5
+  timeout: 5000
+  host: localhost
+
+development:
+  <<: *default
+  database: inicro_development
+
+test:
+  <<: *default
+  database: inicro_testing
+
+production:
+  <<: *default
+  username: Rails.application.credentials.inicro_prod_user
+  password: Rails.application.credentials.inicro_prod_password
+  host: Rails.application.credentials.inicro_prod_host
+  port: Rails.application.credentials.inicro_prod_port
