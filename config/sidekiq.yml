@@ -1,4 +1,11 @@
 ---
 :verbose: true
 :logfile: ./log/sidekiq.log
-:concurrency: 5
+:concurrency: 3
+:max_retries: 5
+:queues:
+  - critical
+  - high
+  - default
+  - low
+
