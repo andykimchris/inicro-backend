@@ -3,9 +3,10 @@
 :logfile: ./log/sidekiq.log
 :concurrency: 3
 :max_retries: 5
+
+# TODO: Eventually create queues for separate environments, we don't want to enqueue all jobs locally
 :queues:
   - critical
   - high
   - default
   - low
-
