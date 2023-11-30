@@ -64,6 +64,8 @@ group :test do
   gem 'pry'
   gem 'rspec-rails', '~> 6.0.0'
 
+  gem 'rspec-sidekiq'
+
   # Linter
   gem 'rubocop', require: false
   gem 'rubocop-factory_bot', require: false
