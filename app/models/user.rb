@@ -24,6 +24,10 @@ class User < ApplicationRecord
     self.email = email.downcase if email
   end
 
+  def send_devise_notification(notification, *)
+    devise_mailer.send(notification, self, *).deliver_later
+  end
+
   private
 
   def password_matcher
