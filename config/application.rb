@@ -11,6 +11,8 @@ module DeviseVue
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.1
 
+   config.active_job.queue_adapter     = :sidekiq
+
     config.active_storage.variant_processor = :vips
 
     config.session_store :cookie_store, key: '_interslice_session'
