@@ -1,0 +1,4 @@
+log_message_job:
+  cron: "0 0 * * 0"
+  class: "LogMessageJob"
+  queue: default
