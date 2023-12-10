@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_03_175836) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_09_171653) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -94,6 +94,26 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_03_175836) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "units", force: :cascade do |t|
+    t.bigint "listing_id", null: false
+    t.uuid "user_id", null: false
+    t.integer "size"
+    t.integer "amount", null: false
+    t.integer "unit_type", null: false
+    t.integer "bedroom_count"
+    t.integer "bathroom_count"
+    t.integer "full_bathroom_count"
+    t.string "floorplan_image"
+    t.text "description"
+    t.string "identifier"
+    t.boolean "is_available"
+    t.datetime "availability_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["listing_id"], name: "index_units_on_listing_id"
+    t.index ["user_id"], name: "index_units_on_user_id"
+  end
+
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -117,4 +137,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_03_175836) do
   add_foreign_key "listing_amenities", "listings"
   add_foreign_key "listings", "locations"
   add_foreign_key "listings", "users"
+  add_foreign_key "units", "listings"
+  add_foreign_key "units", "users"
 end
