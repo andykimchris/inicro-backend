@@ -80,7 +80,7 @@ GEM
       minitest (>= 5.1)
       mutex_m
       tzinfo (~> 2.0)
-    addressable (2.8.5)
+    addressable (2.8.6)
       public_suffix (>= 2.0.2, < 6.0)
     ast (2.4.2)
     base64 (0.2.0)
@@ -131,7 +131,6 @@ GEM
     dry-core (1.0.1)
       concurrent-ruby (~> 1.0)
       zeitwerk (~> 2.6)
-    error_highlight (0.6.0)
     erubi (1.12.0)
     et-orbi (1.2.7)
       tzinfo
@@ -454,7 +453,6 @@ DEPENDENCIES
   debug
   devise (~> 4.9)
   devise-jwt
-  error_highlight (>= 0.4.0)
   factory_bot_rails
   faker
   google-cloud-storage (~> 1.11)
