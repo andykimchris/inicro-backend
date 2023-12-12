@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :location, class: 'Location' do
+  factory :location do
     longitude { 34.43443 }
     latitude { 34.435 }
     description { 'Lorem Ipsum' }
