@@ -2,7 +2,7 @@ class CreateUnits < ActiveRecord::Migration[7.1]
   def change
     create_table :units do |t|
       t.references :listing, null: false, foreign_key: true
-      t.references :user, null: false, foreign_key: true, type: :uuid
+      t.references :user, null: true, foreign_key: true, type: :uuid
       t.integer :size
       t.integer :amount, null: false
       t.integer :unit_type, null: false

@@ -96,7 +96,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_09_171653) do
 
   create_table "units", force: :cascade do |t|
     t.bigint "listing_id", null: false
-    t.uuid "user_id", null: false
+    t.uuid "user_id"
     t.integer "size"
     t.integer "amount", null: false
     t.integer "unit_type", null: false
