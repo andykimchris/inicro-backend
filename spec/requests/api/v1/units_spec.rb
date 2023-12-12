@@ -24,4 +24,36 @@ RSpec.describe 'Api::V1::Units' do
       end
     end
   end
+
+  describe 'PUT /unit' do
+    let(:update_url) { "/api/v1/units/#{unit.id}" }
+
+    context 'when proprietor is not authenticated' do
+      let(:proprietor_user) { create_proprietor_user }
+      let(:unit) { create(:studio_unit) }
+
+      it 'returns unauthorized (401) status' do
+        put update_url, params: { identifier: 'J039', amount: 25_000 }
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
+    context 'when proprietor is authenticated' do
+      let(:proprietor) { create_proprietor_user }
+      let(:unit) { create(:studio_unit) }
+      let(:login_url) { '/users/login/' }
+
+      before do
+        post login_url, params: { user: { email: proprietor.email, password: proprietor.password } }
+      end
+
+      context 'with valid params' do
+        it 'updates the unit' do
+          put update_url, params: { id: unit.id, identifier: 'J039', amount: 25_000 }
+          expect(response).to have_http_status :ok
+          expect(unit.reload.identifier).to eq('J039')
+        end
+      end
+    end
+  end
 end
