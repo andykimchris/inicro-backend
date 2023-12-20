@@ -14,6 +14,15 @@ module Api
         render json: { error: 'Unit not found' }, status: :not_found
       end
 
+      def create
+        @unit = Unit.new(unit_params)
+        if @unit.save
+          render json: { success: true, unit: @unit.as_json(include: :images) }, status: :created
+        else
+          render json: { error: @unit.errors, status: :unprocessable_entity }
+        end
+      end
+
       def update
         @unit ||= Unit.find(params[:id])
 
@@ -30,7 +39,7 @@ module Api
 
       def unit_params
         params.permit(:id, :size, :amount, :identifier, :description, :availability_date,
-                      :unit_type, :unit_lease_type, :floorplan_image, images: [])
+                      :unit_type, :unit_lease_type, :listing_id, :floorplan_image, images: [])
       end
 
       def user_must_be_proprietor

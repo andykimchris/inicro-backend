@@ -19,8 +19,34 @@ RSpec.describe 'Api::V1::Units' do
         it 'returns the requested unit' do
           expect(unit).to be_valid
           json_response = response.parsed_body
-          expect(json_response).to have_key('unit')
+          expect(json_response).to have_key(:unit)
         end
+      end
+    end
+  end
+
+  describe 'POST /unit' do
+    context 'when creating a unit as a proprietor' do
+      let(:create_unit_url) { '/api/v1/units/' }
+      let(:listing) { create_listing }
+      let(:login_url) { '/users/login/' }
+      let(:user) { create_proprietor_user }
+
+      before do
+        post login_url, params: { user: { email: user.email, password: user.password } }
+        post create_unit_url,
+             params: { listing_id: listing.id, size: 85, amount: 25_000, unit_type: '2-bedroom', is_available: true,
+                       unit_lease_type: 'rental' }
+      end
+
+      it 'returns created (201) status' do
+        expect(unit).to be_valid
+        expect(response).to have_http_status :created
+      end
+
+      it 'returns a unit object' do
+        json_response = response.parsed_body
+        expect(json_response).to have_key(:unit)
       end
     end
   end
