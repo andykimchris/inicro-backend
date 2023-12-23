@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    class ListingController < ApplicationController
+    class ListingsController < ApplicationController
       before_action :authenticate_user!, except: :show
       before_action :user_must_be_proprietor, only: %i[create update]
 
