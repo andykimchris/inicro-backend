@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :user do
   factory :proprietor_user, class: 'User' do
     email { Faker::Internet.email }
     password { 'Johndoe123&' }

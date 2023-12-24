@@ -2,23 +2,18 @@
 
 source 'https://rubygems.org'
 
-ruby '3.1.4'
 ruby '3.2.2'
 
-gem 'rails', '~> 7.1.1'
 gem 'rails', '~> 7.1.1'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
-gem 'pg', '~> 1.1'
 
-gem 'puma', '>= 5.0'
 gem 'puma', '>= 5.0'
 
 gem 'devise', '~> 4.9'
 gem 'devise-jwt'
 gem 'omniauth'
-gem 'omniauth-facebook'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 
@@ -40,9 +35,6 @@ gem 'ruby-vips', '>= 2.1.0'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin Ajax possible
 gem 'rack-cors'
-gem 'rack-cors'
-
-gem 'google-cloud-storage', '~> 1.11', require: false
 
 gem 'google-cloud-storage', '~> 1.11', require: false
 

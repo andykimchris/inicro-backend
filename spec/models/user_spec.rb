@@ -24,9 +24,6 @@ RSpec.describe User do
 
   context 'when validating user password' do
     it 'creates a valid user when password & password confirmation match' do
-      user = create_user
-  context 'when validating user password' do
-    it 'creates a valid user when password & password confirmation match' do
       user = create_proprietor_user
       expect(user).to be_valid
     end
@@ -41,7 +38,6 @@ RSpec.describe User do
       )
 
       expect(user).not_to be_valid
-      expect(user.errors[:password]).to include('must include at least one lowercase letter, one uppercase letter, one digit, and one special character.')
       expect(user.errors[:password])
         .to include('must include at least one lowercase letter,one uppercase letter,one digit,and one special character.')
     end

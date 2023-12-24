@@ -8,10 +8,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable,
          :jwt_authenticatable, jwt_revocation_strategy: JwtDenylist
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
-         :confirmable,
-         :jwt_authenticatable, jwt_revocation_strategy: JwtDenylist
 
   has_many :listings, dependent: :destroy, inverse_of: :user
 
