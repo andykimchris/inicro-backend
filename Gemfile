@@ -6,6 +6,7 @@ ruby '3.2.2'
 
 gem 'rails', '~> 7.1.1'
 
+# Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
 
 gem 'puma', '>= 5.0'
@@ -55,7 +56,7 @@ group :development do
   gem 'factory_bot_rails'
   gem 'pre-commit', require: false
 
-  gem 'error_highlight', '>= 0.4.0', platforms: [:ruby]
+  # gem 'error_highlight', '>= 0.4.0', platforms: [:ruby]
 end
 
 group :test do
