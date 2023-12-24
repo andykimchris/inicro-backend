@@ -1,14 +1,14 @@
 name: Backend CI + Lint
 
 on:
-    push:
-      branches:
-        - main
-        - develop
-    pull_request:
-      branches:
-        - main
-        - develop
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
 
 jobs:
   test:
@@ -17,17 +17,16 @@ jobs:
     needs: lint
 
     services:
-        postgres:
-          image: postgres:latest
-          env:
-            POSTGRES_USER: postgres
-            POSTGRES_PASSWORD: password
-          ports:
-            - 5432:5432
-          options:
-            --health-cmd pg_isready
-            --health-interval 10s
-            --health-timeout 5s
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
 
     steps:
       - name: Checkout code
@@ -79,29 +78,29 @@ jobs:
           path: coverage/
 
   lint:
-    name:  Linting and Security Audit
+    name: Linting and Security Audit
     runs-on: ubuntu-latest
 
     steps:
-        - name: Checkout code
-          uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-        - name: Set up Ruby
-          uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf
-          with:
-            bundler-cache: true
-            ruby-version: 3.2.2
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf
+        with:
+          bundler-cache: true
+          ruby-version: 3.2.2
 
-        - name: Install dependencies 
-          run: |
-            gem install bundler
-            bundle install --jobs 4 --retry 3
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle install --jobs 4 --retry 3
 
-        - name: Security audit dependencies
-          run: bundle exec bundler-audit --update
+      - name: Security audit dependencies
+        run: bundle exec bundler-audit --update
 
-        - name: Security audit application code
-          run: bundle exec brakeman -q -w2
+      - name: Security audit application code
+        run: bundle exec brakeman -q -w2
 
-        - name: Lint via RuboCop
-          run: bundle exec rubocop --parallel -A
+      - name: Lint via RuboCop
+        run: bundle exec rubocop --parallel -A
