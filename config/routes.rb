@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :listings, only: %i[create show update]
+      resources :units, only: %i[create show update]
     end
   end
 end
