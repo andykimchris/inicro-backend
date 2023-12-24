@@ -8,7 +8,7 @@ RSpec.describe 'Api::V1::Listings' do
 
   describe 'GET /listing' do
     context 'when showing a listing' do
-      let(:show_listing_url) { "/api/v1/listing/#{listing.id}" }
+      let(:show_listing_url) { "/api/v1/listings/#{listing.id}" }
 
       context 'with valid listing ID' do
         before do
@@ -29,7 +29,7 @@ RSpec.describe 'Api::V1::Listings' do
       end
 
       context 'with invalid listing ID' do
-        let(:show_listing_url) { '/api/v1/listing/:id' }
+        let(:show_listing_url) { '/api/v1/listings/:id' }
 
         before do
           get show_listing_url, params: { id: 'invalid_id' }
@@ -47,7 +47,7 @@ RSpec.describe 'Api::V1::Listings' do
   end
 
   describe 'POST /listings' do
-    let(:create_listing_url) { '/api/v1/listing/' }
+    let(:create_listing_url) { '/api/v1/listings/' }
     let(:login_url) { '/users/login/' }
 
     context 'when creating a listing as an authenticated proprietor' do
@@ -92,7 +92,7 @@ RSpec.describe 'Api::V1::Listings' do
 
   describe 'PUT /listing' do
     let(:location) { create_location }
-    let(:update_listing_url) { "/api/v1/listing/#{listing.id}" }
+    let(:update_listing_url) { "/api/v1/listings/#{listing.id}" }
 
     context 'when user is not authenticated' do
       let(:proprietor_user) { create_proprietor_user }

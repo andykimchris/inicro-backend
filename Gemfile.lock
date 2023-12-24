@@ -92,7 +92,8 @@ GEM
     bigdecimal (3.1.5)
     bootsnap (1.17.0)
       msgpack (~> 1.2)
-    brakeman (6.1.0)
+    brakeman (6.1.1)
+      racc
     builder (3.2.4)
     bundler-audit (0.9.1)
       bundler (>= 1.2.0, < 3)
@@ -103,7 +104,7 @@ GEM
     connection_pool (2.4.1)
     crass (1.0.6)
     date (3.3.4)
-    debug (1.9.0)
+    debug (1.9.1)
       irb (~> 1.10)
       reline (>= 0.3.8)
     declarative (0.0.20)
@@ -131,7 +132,6 @@ GEM
     dry-core (1.0.1)
       concurrent-ruby (~> 1.0)
       zeitwerk (~> 2.6)
-    error_highlight (0.6.0)
     erubi (1.12.0)
     et-orbi (1.2.7)
       tzinfo
@@ -142,7 +142,7 @@ GEM
       railties (>= 5.0.0)
     faker (3.2.2)
       i18n (>= 1.8.11, < 2)
-    faraday (2.7.12)
+    faraday (2.8.1)
       base64
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
@@ -195,7 +195,7 @@ GEM
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
     io-console (0.7.1)
-    irb (1.10.1)
+    irb (1.11.0)
       rdoc
       reline (>= 0.3.8)
     json (2.7.1)
@@ -219,7 +219,7 @@ GEM
     multi_json (1.15.0)
     multi_xml (0.6.0)
     mutex_m (0.2.0)
-    net-imap (0.4.8)
+    net-imap (0.4.9)
       date
       net-protocol
     net-pop (0.1.2)
@@ -243,7 +243,7 @@ GEM
       rack (>= 1.2, < 4)
       snaky_hash (~> 2.0)
       version_gem (~> 1.1)
-    omniauth (2.1.1)
+    omniauth (2.1.2)
       hashie (>= 3.4.6)
       rack (>= 2.2.3)
       rack-protection
@@ -270,7 +270,7 @@ GEM
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
-    psych (5.1.1.1)
+    psych (5.1.2)
       stringio
     public_suffix (5.0.4)
     puma (6.4.0)
@@ -322,7 +322,7 @@ GEM
     rake (13.1.0)
     rdoc (6.6.2)
       psych (>= 4.0.0)
-    redis-client (0.19.0)
+    redis-client (0.19.1)
       connection_pool
     regexp_parser (2.8.3)
     reline (0.4.1)
@@ -454,7 +454,6 @@ DEPENDENCIES
   debug
   devise (~> 4.9)
   devise-jwt
-  error_highlight (>= 0.4.0)
   factory_bot_rails
   faker
   google-cloud-storage (~> 1.11)
