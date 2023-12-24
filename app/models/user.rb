@@ -10,6 +10,7 @@ class User < ApplicationRecord
          :jwt_authenticatable, jwt_revocation_strategy: JwtDenylist
 
   has_many :listings, dependent: :destroy, inverse_of: :user
+  has_one :unit, dependent: :nullify
 
   validates :email, presence: true, uniqueness: true
   validates :is_proprietor, :is_occupant, inclusion: { in: [true, false] }
