@@ -1,0 +1,50 @@
+version: "3.4"
+
+services:
+  db:
+    container_name: postgres
+    image: "postgres:latest"
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5432:5432
+  redis:
+    container_name: redis
+    image: redis
+    command: redis-server
+    volumes:
+      - "redis:/data"
+    ports:
+      - "6379:6379"
+  sidekiq:
+    container_name: sidekiq
+    depends_on:
+      - db
+      - redis
+      - web
+    build: .
+    command: bundle exec sidekiq -C config/sidekiq.yml
+    volumes:
+      - .:/app
+  web:
+    container_name: web
+    image: inicro-api
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 4000:4000
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+      - redis
+
+volumes:
+  postgres:
+  redis:
+# networks:
+#   default:
+#     name: inicro-api
