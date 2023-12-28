@@ -24,7 +24,7 @@ module Users
     end
 
     def respond_with(_resource, _opts = {})
-      render json: { message: "You've logged in sucessfully.", user: current_user }, status: :ok
+      render json: { message: "You've logged in sucessfully.", user: UserBluePrint.render(current_user) }, status: :ok
     end
 
     def respond_to_on_destroy
