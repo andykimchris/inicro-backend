@@ -9,7 +9,7 @@ module Api
 
       def show
         @unit ||= Unit.find(params[:id])
-        render json: { success: true, unit: @unit.as_json(include: :images) }, status: :ok
+        render json: { success: true, unit: UnitBlueprint.render(@unit.as_json(include: :images)) }, status: :ok
       rescue ActiveRecord::RecordNotFound
         render json: { error: 'Unit not found' }, status: :not_found
       end
@@ -17,7 +17,7 @@ module Api
       def create
         @unit = Unit.new(unit_params)
         if @unit.save
-          render json: { success: true, unit: @unit.as_json(include: :images) }, status: :created
+          render json: { success: true, unit: UnitBlueprint.render(@unit.as_json(include: :images)) }, status: :created
         else
           render json: { error: @unit.errors, status: :unprocessable_entity }
         end
@@ -27,7 +27,7 @@ module Api
         @unit ||= Unit.find(params[:id])
 
         if @unit&.update(unit_params)
-          render json: { success: true, unit: @unit }, status: :ok
+          render json: { success: true, unit: UnitBlueprint.render(@unit) }, status: :ok
         else
           render json: @unit.errors, status: :unprocessable_entity
         end
