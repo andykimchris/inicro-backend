@@ -8,7 +8,12 @@ module Api
 
       def show
         @listing = Listing.find(params[:id])
-        render json: { success: true, listing: @listing.as_json(include: :images) }, status: :ok
+        render json: { success: true,
+                       listing: ListingBlueprint.render_as_hash(
+                         @listing,
+                         root: :attrs,
+                         meta: { images: @listing.images.map { |image| url_for(image) } }
+                       ) }, status: :ok
       rescue ActiveRecord::RecordNotFound
         render json: { error: 'Listing not found' }, status: :not_found
       end
@@ -18,11 +23,11 @@ module Api
 
         if @listing.save
           render json: { success: true,
-                         listing: {
-                           id: @listing.id,
-                           title: @listing.title,
-                           images: @listing.images.map { |image| url_for(image) }
-                         } }, status: :created
+                         listing: ListingBlueprint.render_as_hash(
+                           @listing,
+                           root: :attrs,
+                           meta: { images: @listing.images.map { |image| url_for(image) } }
+                         ) }, status: :created
         else
           render json: @listing.errors, status: :unprocessable_entity
         end
@@ -32,7 +37,12 @@ module Api
         @listing = Listing.find(params[:id])
 
         if @listing&.update(listing_params)
-          render json: { success: true, listing: @listing.as_json(include: :images) }, status: :ok
+          render json: { success: true,
+                         listing: ListingBlueprint.render_as_hash(
+                           @listing,
+                           root: :attrs,
+                           meta: { images: @listing.images.map { |image| url_for(image) } }
+                         ) }, status: :ok
         else
           render json: @listing.errors, status: :unprocessable_entity
         end

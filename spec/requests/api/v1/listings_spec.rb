@@ -24,7 +24,7 @@ RSpec.describe 'Api::V1::Listings' do
 
           json_response = response.parsed_body
           expect(json_response).to have_key('listing')
-          expect(json_response['listing']['id']).to eq(listing.id)
+          expect(json_response['listing']['attrs']['id']).to eq(listing.id)
         end
       end
 
