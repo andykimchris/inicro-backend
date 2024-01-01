@@ -12,7 +12,7 @@ module Api
                        listing: ListingBlueprint.render_as_hash(
                          @listing,
                          root: :attrs,
-                         meta: { images: @listing.images.map { |image| url_for(image) } }
+                         meta: { images: @listing.image_urls(request.base_url) }
                        ) }, status: :ok
       rescue ActiveRecord::RecordNotFound
         render json: { error: 'Listing not found' }, status: :not_found
@@ -26,7 +26,7 @@ module Api
                          listing: ListingBlueprint.render_as_hash(
                            @listing,
                            root: :attrs,
-                           meta: { images: @listing.images.map { |image| url_for(image) } }
+                           meta: { images: @listing.image_urls(request.base_url) }
                          ) }, status: :created
         else
           render json: @listing.errors, status: :unprocessable_entity
@@ -41,7 +41,7 @@ module Api
                          listing: ListingBlueprint.render_as_hash(
                            @listing,
                            root: :attrs,
-                           meta: { images: @listing.images.map { |image| url_for(image) } }
+                           meta: { images: @listing.image_urls(request.base_url) }
                          ) }, status: :ok
         else
           render json: @listing.errors, status: :unprocessable_entity

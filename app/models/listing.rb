@@ -21,4 +21,8 @@ class Listing < ApplicationRecord
                      content_type: Constants::IMAGE_FORMATS,
                      size: { less_than: 3.megabytes },
                      length: { maximum: 15 }
+
+  def image_urls(base_url)
+    images.map { |image| "#{base_url}#{Rails.application.routes.url_helpers.rails_blob_path(image, only_path: true)}" }
+  end
 end
