@@ -23,6 +23,12 @@ class Listing < ApplicationRecord
                      length: { maximum: 15 }
 
   def image_urls(base_url)
-    images.map { |image| "#{base_url}#{Rails.application.routes.url_helpers.rails_blob_path(image, only_path: true)}" }
+    images.map { |image| image_url(base_url, image) }
+  end
+
+  private
+
+  def image_url(base_url, image)
+    "#{base_url}#{Rails.application.routes.url_helpers.rails_blob_path(image, only_path: true)}"
   end
 end
