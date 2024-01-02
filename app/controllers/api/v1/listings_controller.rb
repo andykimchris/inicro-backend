@@ -7,7 +7,7 @@ module Api
       before_action :user_must_be_proprietor, only: %i[create update]
 
       def show
-        @listing = Listing.find(params[:id])
+        @listing ||= Listing.find(params[:id])
         render json: { success: true,
                        listing: ListingBlueprint.render_as_hash(
                          @listing,

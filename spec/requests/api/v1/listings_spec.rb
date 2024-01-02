@@ -8,12 +8,10 @@ RSpec.describe 'Api::V1::Listings' do
 
   describe 'GET /listing' do
     context 'when showing a listing' do
-      let(:show_listing_url) { "/api/v1/listings/#{listing.id}" }
+      let(:listing_url) { "/api/v1/listings/#{listing.id}" }
 
       context 'with valid listing ID' do
-        before do
-          get show_listing_url
-        end
+        before { get listing_url }
 
         it 'returns a successful response' do
           expect(response).to have_http_status(:ok)
@@ -29,10 +27,10 @@ RSpec.describe 'Api::V1::Listings' do
       end
 
       context 'with invalid listing ID' do
-        let(:show_listing_url) { '/api/v1/listings/:id' }
+        let(:listing_url) { '/api/v1/listings/:id' }
 
         before do
-          get show_listing_url, params: { id: 'invalid_id' }
+          get listing_url, params: { id: 'invalid_id' }
         end
 
         it 'returns a not found (404) status' do

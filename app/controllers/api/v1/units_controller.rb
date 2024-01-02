@@ -3,6 +3,8 @@
 module Api
   module V1
     class UnitsController < ApplicationController
+      # FIXME: Render floorplan_image in UnitBlueprint
+
       before_action :authenticate_user!, except: :show
       before_action :user_must_be_proprietor, only: %i[create update]
 
@@ -12,8 +14,9 @@ module Api
                       UnitBlueprint.render_as_hash(
                         @unit,
                         root: :fields,
-                        meta: { floorplan_image: @unit.floorplan_image_url(request.base_url),
-                                images: @unit.image_urls(request.base_url) }
+                        meta: {
+                          images: @unit.image_urls(request.base_url)
+                        }
                       ) }, status: :ok
       rescue ActiveRecord::RecordNotFound
         render json: { error: 'Unit not found' }, status: :not_found
@@ -26,8 +29,9 @@ module Api
                         UnitBlueprint.render_as_hash(
                           @unit,
                           root: :fields,
-                          meta: { floorplan_image: @unit.floorplan_image_url(request.base_url),
-                                  images: @unit.image_urls(request.base_url) }
+                          meta: {
+                            images: @unit.image_urls(request.base_url)
+                          }
                         ) }, status: :created
         else
           render json: { error: @unit.errors, status: :unprocessable_entity }
@@ -42,8 +46,9 @@ module Api
                         UnitBlueprint.render_as_hash(
                           @unit,
                           root: :fields,
-                          meta: { floorplan_image: @unit.floorplan_image_url(request.base_url),
-                                  images: @unit.image_urls(request.base_url) }
+                          meta: {
+                            images: @unit.image_urls(request.base_url)
+                          }
                         ) }, status: :ok
         else
           render json: @unit.errors, status: :unprocessable_entity
