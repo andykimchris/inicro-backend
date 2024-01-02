@@ -11,7 +11,7 @@ module Api
         render json: { success: true,
                        listing: ListingBlueprint.render_as_hash(
                          @listing,
-                         root: :attrs,
+                         root: :fields,
                          meta: { images: @listing.image_urls(request.base_url) }
                        ) }, status: :ok
       rescue ActiveRecord::RecordNotFound
@@ -25,7 +25,7 @@ module Api
           render json: { success: true,
                          listing: ListingBlueprint.render_as_hash(
                            @listing,
-                           root: :attrs,
+                           root: :fields,
                            meta: { images: @listing.image_urls(request.base_url) }
                          ) }, status: :created
         else
@@ -40,7 +40,7 @@ module Api
           render json: { success: true,
                          listing: ListingBlueprint.render_as_hash(
                            @listing,
-                           root: :attrs,
+                           root: :fields,
                            meta: { images: @listing.image_urls(request.base_url) }
                          ) }, status: :ok
         else
