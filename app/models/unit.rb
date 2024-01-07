@@ -4,6 +4,9 @@ class Unit < ApplicationRecord
   belongs_to :listing
   belongs_to :user, optional: true
 
+  has_many :unit_wishlists # rubocop:disable Rails/HasManyOrHasOneDependent
+  has_many :users, through: :unit_wishlists
+
   has_one_attached :floorplan_image
   has_many_attached :images
 
