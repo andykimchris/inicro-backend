@@ -10,7 +10,8 @@ class User < ApplicationRecord
          :jwt_authenticatable, jwt_revocation_strategy: JwtDenylist
 
   has_many :listings, dependent: :destroy, inverse_of: :user
-  has_one :unit, dependent: :nullify
+  has_many :unit_wishlists # rubocop:disable Rails/HasManyOrHasOneDependent
+  has_many :units, through: :unit_wishlists
 
   validates :email, presence: true, uniqueness: true
   validates :is_proprietor, :is_occupant, inclusion: { in: [true, false] }
