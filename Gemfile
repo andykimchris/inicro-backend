@@ -33,6 +33,8 @@ gem 'active_storage_validations'
 gem 'image_processing', '~> 1.2'
 gem 'ruby-vips', '>= 2.1.0'
 
+gem 'aws-sdk-s3', require: false
+
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin Ajax possible
 gem 'rack-cors'
 
