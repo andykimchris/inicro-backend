@@ -33,9 +33,7 @@ storage/.keep
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
-/config/credentials/production.key
-/config/credentials/test.key
-/config/credentials/development.key
+/config/credentials/*.key
 
 # GCS Service Account key
 /config/secrets/*
