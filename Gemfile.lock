@@ -148,6 +148,7 @@ GEM
     dry-core (1.0.1)
       concurrent-ruby (~> 1.0)
       zeitwerk (~> 2.6)
+    dry-initializer (3.1.1)
     erubi (1.12.0)
     et-orbi (1.2.7)
       tzinfo
@@ -472,6 +473,7 @@ DEPENDENCIES
   debug
   devise (~> 4.9)
   devise-jwt
+  dry-initializer
   factory_bot_rails
   faker
   google-cloud-storage (~> 1.11)

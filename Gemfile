@@ -22,6 +22,8 @@ gem 'omniauth-google-oauth2'
 gem 'sidekiq', '~> 7.2'
 gem 'sidekiq-cron'
 
+gem 'dry-initializer'
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[windows jruby]
 
