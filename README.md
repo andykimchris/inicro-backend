@@ -3,6 +3,12 @@
 ## Local setup
 - Fetch master keys for all environments in Dashlane & create key files in config/credentials
 
+## Terraform
+
+## AWS
+
+## 
+
 Will be updated in time.
 
 # We follow the Ruby guidelines on this codebase, via Rubocop
