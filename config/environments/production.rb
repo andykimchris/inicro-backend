@@ -61,6 +61,7 @@ Rails.application.configure do
   # config.cache_store = :mem_cache_store
 
   config.action_mailer.default_url_options = { host: Rails.application.credentials.base_url
+  config.action_controller.default_url_options = { host: Rails.application.credentials.base_url }
 }
   config.action_mailer.perform_caching = false
 
