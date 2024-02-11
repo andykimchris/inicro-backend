@@ -6,10 +6,16 @@ module Api
       before_action :authenticate_user!, except: :show
       # TODO: Investigate why this is failing
       # before_action :user_must_be_proprietor, only: %i[create update]
+      include UnitHelper
 
       def show
         @unit ||= Unit.find(params[:id])
-        render json: { success: true, unit: @unit.as_json(include: :images) }, status: :ok
+        image_urls = unit_image_urls(@unit)
+
+        render json: {
+          success: true,
+          unit: @unit.as_json.except('images').merge(image_urls)
+        }, status: :ok
       rescue ActiveRecord::RecordNotFound
         render json: { error: 'Unit not found' }, status: :not_found
       end
@@ -17,7 +23,8 @@ module Api
       def create
         @unit = Unit.new(unit_params)
         if @unit.save
-          render json: { success: true, unit: @unit.as_json(include: :images) }, status: :created
+          image_urls = unit_image_urls(@unit)
+          render json: { success: true, unit: @unit.as_json.except('images').merge(image_urls) }, status: :created
         else
           render json: { error: @unit.errors, status: :unprocessable_entity }
         end
@@ -39,7 +46,8 @@ module Api
 
       def unit_params
         params.permit(:id, :size, :amount, :identifier, :description, :availability_date,
-                      :unit_type, :unit_lease_type, :listing_id, :floorplan_image, images: [])
+                      :unit_type, :unit_lease_type, :listing_id, :floorplan_image,
+                      :qrcode, images: [])
       end
 
       def user_must_be_proprietor
