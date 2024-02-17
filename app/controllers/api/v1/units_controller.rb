@@ -21,6 +21,7 @@ module Api
       end
 
       def create
+        # FIXME: we might offload the entire unit creation process into a job
         @unit = Unit.new(unit_params)
         if @unit.save
           image_urls = unit_image_urls(@unit)
@@ -40,6 +41,10 @@ module Api
         end
       rescue ActiveRecord::RecordNotFound
         render json: { success: false, error: 'Unit not found' }, status: :not_found
+      end
+
+      def assign_unit_to_user
+        # update fields assigned_by_id, assignted_at, is_available, user_id
       end
 
       private

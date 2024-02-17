@@ -15,6 +15,8 @@ class Unit < ApplicationRecord
   enum unit_lease_type: { rental: 0, purchase: 1 }
 
   validates :amount, :unit_type, :unit_lease_type, presence: true
+  validates :identifier, uniqueness: { scope: :listing_id }, if: -> { listing_id.present? }
+
   validates :floorplan_image,
             content_type: Constants::IMAGE_FORMATS,
             size: { less_than: 1.megabyte }
@@ -26,6 +28,7 @@ class Unit < ApplicationRecord
 
   validate :user_is_occupant
 
+  # TODO: Generate this ONLY when proprietor is giving access to a tenant
   before_commit :generate_qrcode, on: :create
 
   private
@@ -36,9 +39,13 @@ class Unit < ApplicationRecord
     errors.add(:user, 'must be an occupant')
   end
 
-  def generate_qrcode
+  def assign_unit_to_user_path
+    # TODO: Figure out what this POST path should do
     host = Rails.application.config.action_controller.default_url_options[:host]
-    assign_unit_to_user_path = "http://#{host}/unit/#{id}"
+    @assign_unit_to_user_path ||= "http://#{host}/unit/#{id}"
+  end
+
+  def generate_qrcode
     qr = RQRCode::QRCode.new(assign_unit_to_user_path)
 
     file = qr.as_png(
@@ -51,7 +58,7 @@ class Unit < ApplicationRecord
       module_px_size: 6,
       resize_exactly_to: false,
       resize_gte_to: false,
-      size: 120
+      size: 240
     )
 
     qrcode.attach(

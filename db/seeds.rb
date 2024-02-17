@@ -30,7 +30,7 @@ class Seeding
   end
 
   def seed_listing_unit_data
-    FactoryBot.create(:location)
+    FactoryBot.create(:studio_unit)
   end
 end
 
