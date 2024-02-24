@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+
+  <body>
+    <h1>Welcome to inicro.com, <%= @names %></h1>
+    <p>
+      You have successfully booked a viewing appointment for <%= @booking.booking_set_at %>, 
+      for unit: <%= @unit.identifier %>, at listing: <%= @listing.title %>   
+    </p>
+    <p>
+      If you would like to change your booking date, just use this link to update: <%= @url %>.
+    </p>
+    <p>Thanks for joining and have a great day!</p>
+  </body>
+</html>

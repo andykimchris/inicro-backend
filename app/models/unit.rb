@@ -28,7 +28,7 @@ class Unit < ApplicationRecord
   private
 
   def user_is_occupant
-    return if user.is_occupant
+    return if user&.is_occupant
 
     errors.add(:user, 'must be an occupant')
   end
