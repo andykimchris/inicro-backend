@@ -48,8 +48,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_18_145933) do
     t.string "first_name"
     t.string "last_name"
     t.string "phone_number"
-    t.string "email"
-    t.datetime "booking_set_at"
+    t.string "email", null: false
+    t.datetime "booking_set_at", null: false
     t.string "booking_assigned_to_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
