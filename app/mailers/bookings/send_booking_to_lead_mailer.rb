@@ -9,13 +9,7 @@ module Bookings
       @unit = unit
       @listing = unit.listing
 
-      mail(from: "Inicro #{BASE_SENDER}", to: @booking.email, subject: "Booking for #{full_name}")
-    end
-
-    private
-
-    def full_name
-      @full_name ||= [@booking.first_name, @booking.last_name].compact.join(' ')
+      mail(from: "Inicro #{BASE_SENDER}", to: @booking.email, subject: "Booking for #{@booking.full_name}")
     end
   end
 end
