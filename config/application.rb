@@ -48,5 +48,7 @@ module DeviseVue
         helper_specs: false,
       )
     end
+
+    config.action_mailer.preview_paths << "#{Rails.root}/spec/mailers/previews"
   end
 end
