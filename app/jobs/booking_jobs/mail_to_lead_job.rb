@@ -5,8 +5,8 @@ module BookingJobs
     queue_as :default
 
     def perform(booking_id)
-      booking = Booking.find(booking_id)
-      unit = booking.unit
+      booking = Booking.find_by(id: booking_id)
+      unit = booking&.unit
 
       Bookings::SendBookingToLeadMailer.send_booking_to_lead(booking:, unit:).deliver_now
     end

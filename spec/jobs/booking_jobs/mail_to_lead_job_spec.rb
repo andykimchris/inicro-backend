@@ -10,14 +10,12 @@ RSpec.describe BookingJobs::MailToLeadJob do
     let(:booking_id) { booking.id }
 
     context 'when fine submission' do
-      it 'sends booking information to lead' do
-        specify do
-          allow(Bookings::SendBookingToLeadMailer).to receive(:send_booking_to_lead)
-          perform
+      specify 'sends booking information to lead' do
+        allow(Bookings::SendBookingToLeadMailer).to receive(:send_booking_to_lead)
+        perform
 
-          expect(Bookings::SendBookingToLeadMailer).to have_received(:send_booking_to_lead)
-            .with(booking:, unit: booking.unit)
-        end
+        expect(Bookings::SendBookingToLeadMailer).to have_received(:send_booking_to_lead)
+          .with(booking:, unit: booking.unit)
       end
 
       it 'updates mailer count' do
