@@ -28,6 +28,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :listings, only: %i[create show update]
       resources :units, only: %i[create show update]
+
+      # UNITS
+      post "units/:id/assign_unit_to_occupant", to:"units#assign_unit_to_occupant"
     end
   end
 end

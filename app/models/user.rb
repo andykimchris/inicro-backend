@@ -38,6 +38,7 @@ class User < ApplicationRecord
     errors.add(:password, 'must include at least one lowercase letter,one uppercase letter,one digit,and one special character.')
   end
 
+  # FIXME: not the case anymore with internal users(admin + support)
   def either_proprietor_or_occupant
     return if is_proprietor ^ is_occupant
 

@@ -43,8 +43,19 @@ module Api
         render json: { success: false, error: 'Unit not found' }, status: :not_found
       end
 
-      def assign_unit_to_user
+      def assign_unit_to_occupant
+        # TODO: Figure out what this POST path should do
+        # NOTE: 1
         # update fields assigned_by_id, assignted_at, is_available, user_id
+        # user_id should be currently signed user who should be an occupant
+        # how do we track assigned by id?
+        # NOTE: 2
+        # we have to make sure that this request coming after qr code scanning or link click, is coming from a user page
+        # in which user has accepted terms of service and is registered on the platform.
+        # NOTE: 3
+        # perhaps send an email to them with details of the unit
+
+        render json: { success: true }, status: :ok
       end
 
       private

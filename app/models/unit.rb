@@ -28,7 +28,7 @@ class Unit < ApplicationRecord
 
   validate :user_is_occupant
 
-  # TODO: Generate this ONLY when proprietor is giving access to a tenant
+  # TODO: Generate this ONLY when proprietor is giving access to a tenant, create is only for test
   before_commit :generate_qrcode, on: :create
 
   private
@@ -40,9 +40,8 @@ class Unit < ApplicationRecord
   end
 
   def assign_unit_to_user_path
-    # TODO: Figure out what this POST path should do
     host = Rails.application.config.action_controller.default_url_options[:host]
-    @assign_unit_to_user_path ||= "http://#{host}/unit/#{id}"
+    @assign_unit_to_user_path ||= "http://#{host}/api/v1/units/#{id}/assign_unit_to_occupant"
   end
 
   def generate_qrcode
