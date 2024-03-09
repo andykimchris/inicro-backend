@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_07_155938) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_17_093046) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -121,6 +121,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_07_155938) do
     t.datetime "availability_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "assigned_at"
+    t.datetime "assigned_by_id"
     t.index ["listing_id"], name: "index_units_on_listing_id"
     t.index ["user_id"], name: "index_units_on_user_id"
   end
@@ -139,6 +141,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_07_155938) do
     t.datetime "updated_at", null: false
     t.boolean "is_proprietor", null: false
     t.boolean "is_occupant", null: false
+    t.string "phone_number"
+    t.string "secondary_phone_number"
+    t.string "first_name"
+    t.string "last_name"
+    t.boolean "is_admin", default: false
+    t.boolean "is_internal", default: false
+    t.boolean "is_active", default: false
+    t.boolean "is_support"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
