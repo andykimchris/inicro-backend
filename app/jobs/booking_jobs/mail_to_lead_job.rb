@@ -6,9 +6,10 @@ module BookingJobs
 
     def perform(booking_id)
       booking = Booking.find_by(id: booking_id)
-      unit = booking&.unit
+      return unless booking
 
-      Bookings::SendBookingToLeadMailer.send_booking_to_lead(booking:, unit:).deliver_now
+      unit = booking.unit
+      Bookings::SendBookingToLeadMailer.with(booking:, unit:).send_booking_to_lead.deliver_later
     end
   end
 end

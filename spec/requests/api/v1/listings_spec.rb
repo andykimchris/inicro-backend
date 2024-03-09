@@ -84,8 +84,8 @@ RSpec.describe 'Api::V1::Listings' do
         post create_listing_url, params: listing_params
       end
 
-      it 'return forbidden (403) status' do
-        expect(response).to have_http_status :forbidden
+      it 'return unauthorized (401) status' do
+        expect(response).to have_http_status :unauthorized
       end
     end
   end

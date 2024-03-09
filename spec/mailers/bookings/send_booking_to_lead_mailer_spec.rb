@@ -3,16 +3,17 @@
 require 'rails_helper'
 
 RSpec.describe Bookings::SendBookingToLeadMailer do
-  let(:booking) { create(:booking) } # Assuming you have FactoryBot configured
+  subject(:mail) { described_class.with(booking:, unit:).send_booking_to_lead }
+
+  let(:booking) { create(:booking) }
   let(:unit) { booking.unit }
-  let(:mail) { described_class.send_booking_to_lead(booking:, unit:) }
   let(:base_sender) { 'chrisandrewmuchiri@gmail.com' }
 
   describe '#send_booking_to_lead' do
     it 'renders the headers' do
       expect(mail.subject).to eq("Booking for #{booking.full_name}")
       expect(mail.to).to eq([booking.email])
-      expect(mail.from).to eq(["Inicro #{base_sender}"])
+      expect(mail.from).to eq("Inicro #{base_sender}")
     end
 
     it 'renders the body' do
