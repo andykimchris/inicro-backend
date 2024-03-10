@@ -19,18 +19,19 @@ class User < ApplicationRecord
   validate :either_proprietor_or_occupant
   validate :password_matcher
 
-  before_save :normalize_email_attr
+  before_save :normalize_email
+
+  private
+
   PASSWORD_REGEX = /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{8,}\z/
 
-  def normalize_email_attr
-    self.email = email.downcase if email
+  def normalize_email
+    self.email = email.strip.downcase
   end
 
   def send_devise_notification(notification, *)
     devise_mailer.send(notification, self, *).deliver_later
   end
-
-  private
 
   def password_matcher
     return if password.match(PASSWORD_REGEX)
