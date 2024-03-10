@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ApplicationMailer < ActionMailer::Base
-  default from: 'from@example.com'
+  BASE_SENDER = Rails.application.credentials.base_mail_sender
+
+  default from: "Inicro #{BASE_SENDER}"
   layout 'mailer'
 end

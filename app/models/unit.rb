@@ -6,6 +6,7 @@ class Unit < ApplicationRecord
 
   has_many :unit_wishlists # rubocop:disable Rails/HasManyOrHasOneDependent
   has_many :users, through: :unit_wishlists
+  has_many :bookings, dependent: :destroy
 
   has_one_attached :floorplan_image
   has_many_attached :images
@@ -28,8 +29,8 @@ class Unit < ApplicationRecord
   private
 
   def user_is_occupant
-    return unless user&.is_proprietor?
+    return if user.nil? || user.is_occupant
 
-    errors.add(:user, 'must be an occupant')
+    errors.add(:user, 'assigned user must be an occupant')
   end
 end

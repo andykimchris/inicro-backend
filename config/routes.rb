@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :listings, only: %i[create show update]
       resources :units, only: %i[create show update]
+      resources :bookings, only: %i[index create]
     end
   end
 end
