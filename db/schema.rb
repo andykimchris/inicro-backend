@@ -49,8 +49,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_17_090641) do
     t.string "last_name"
     t.string "phone_number"
     t.string "email", null: false
-    t.datetime "booking_set_at", null: false
-    t.uuid "booking_assigned_to_id"
+    t.datetime "scheduled_at", null: false
+    t.uuid "assigned_to_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["unit_id"], name: "index_bookings_on_unit_id"
@@ -134,6 +134,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_17_090641) do
     t.datetime "availability_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "assigned_at"
+    t.uuid "assigned_by_id"
     t.index ["listing_id"], name: "index_units_on_listing_id"
     t.index ["user_id"], name: "index_units_on_user_id"
   end
@@ -152,6 +154,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_17_090641) do
     t.datetime "updated_at", null: false
     t.boolean "is_proprietor", null: false
     t.boolean "is_occupant", null: false
+    t.string "phone_number"
+    t.string "secondary_phone_number"
+    t.string "first_name"
+    t.string "last_name"
+    t.boolean "is_admin", default: false
+    t.boolean "is_internal", default: false
+    t.boolean "is_active", default: false
+    t.boolean "is_support"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

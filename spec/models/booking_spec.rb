@@ -9,8 +9,8 @@ RSpec.describe Booking do
     context 'when unit is not available' do
       it 'raises error' do
         booking = described_class.new(
-          unit:, email: 'test1@example.com', booking_set_at: Time.now.utc + 4.days,
-          phone_number: '344-233-4343', booking_assigned_to_id: unit.listing.user_id
+          unit:, email: 'test1@example.com', scheduled_at: Time.now.utc + 4.days,
+          phone_number: '344-233-4343', assigned_to_id: unit.listing.user_id
         )
 
         expect(booking).not_to be_valid
@@ -23,13 +23,13 @@ RSpec.describe Booking do
       let(:unit) { create(:studio_unit) }
 
       before do
-        create(:booking, unit:, email: 'test@example.com', booking_set_at: Time.now.utc + 4.days)
+        create(:booking, unit:, email: 'test@example.com', scheduled_at: Time.now.utc + 4.days)
       end
 
       it 'raises error' do
         booking = described_class.new(
-          unit:, email: 'test@example.com', booking_set_at: Time.now.utc + 4.days,
-          phone_number: '344-233-4343', booking_assigned_to_id: unit.listing.user_id
+          unit:, email: 'test@example.com', scheduled_at: Time.now.utc + 4.days,
+          phone_number: '344-233-4343', assigned_to_id: unit.listing.user_id
         )
 
         expect(booking).not_to be_valid

@@ -3,9 +3,9 @@
 class Booking < ApplicationRecord
   belongs_to :unit
 
-  validates :email, :booking_set_at, presence: true
-  validate :unit_must_be_available
-  validate :unique_booking_for_user_and_unit
+  validates :email, :scheduled_at, presence: true
+  validate :unit_must_be_available, on: :create
+  validate :unique_booking_for_user_and_unit, on: :create
 
   before_save :normalize_email
 

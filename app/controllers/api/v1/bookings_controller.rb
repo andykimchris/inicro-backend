@@ -12,6 +12,7 @@ module Api
 
       def create
         booking = Booking.new(booking_params)
+
         if booking.save
           assign_booking_to_listing_owner(booking)
 
@@ -25,12 +26,11 @@ module Api
       private
 
       def booking_params
-        params.permit(:unit_id, :first_name, :last_name, :email, :phone_number, :booking_set_at)
+        params.permit(:unit_id, :first_name, :last_name, :email, :phone_number, :scheduled_at)
       end
 
       def assign_booking_to_listing_owner(booking)
-        booking.booking_assigned_to_id = booking.unit.listing.user_id
-        booking.save
+        booking.update!(assigned_to_id: booking.unit.listing.user_id)
       end
     end
   end
