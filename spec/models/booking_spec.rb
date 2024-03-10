@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Booking do
   describe 'validations' do
-    let(:unit) { create(:one_bedroom_unit) }
+    let(:unit) { create(:one_bedroom_unit, :unavailable) }
 
     context 'when unit is not available' do
       it 'raises error' do
