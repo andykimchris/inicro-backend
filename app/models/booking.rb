@@ -4,12 +4,30 @@ class Booking < ApplicationRecord
   belongs_to :unit
 
   validates :email, :booking_set_at, presence: true
+  validate :unit_must_be_available
+  validate :unique_booking_for_user_and_unit
 
-  # TODO: validate that the same unit can't be booked twice by the same user
-  # TODO: validate that you can't book a unit that is not available
-  # TODO : set callback action on booking_assigned_to_id on creation to listing owner
+  before_save :normalize_email
 
   def full_name
     [first_name, last_name].compact.join(' ')
+  end
+
+  private
+
+  def normalize_email
+    self.email = email.strip.downcase
+  end
+
+  def unit_must_be_available
+    return unless unit && !unit.is_available
+
+    errors.add(:unit, 'is not available for booking.')
+  end
+
+  def unique_booking_for_user_and_unit
+    return unless Booking.exists?(unit_id:, email:)
+
+    errors.add(:base, 'You have already booked this unit.')
   end
 end

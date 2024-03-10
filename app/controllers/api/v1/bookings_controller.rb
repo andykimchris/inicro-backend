@@ -6,18 +6,19 @@ module Api
       before_action :user_must_be_proprietor, only: %i[index]
 
       def index
-        # TODO: Figure out how to scope this to only a specific listing or unit, and attached to listing owner
-        bookings = Booking.all
+        bookings = Booking.joins(unit: :listing).where(listing: { user_id: current_user.id })
         render json: { success: true, bookings: }, status: :ok
       end
 
       def create
         booking = Booking.new(booking_params)
-        if booking.save!
+        if booking.save
+          assign_booking_to_listing_owner(booking)
+
           BookingJobs::MailToLeadJob.perform_later(booking.id)
           render json: { success: true }, status: :created
         else
-          render json: booking.errors, status: :unprocessable_entity
+          render json: { message: booking.errors.full_messages.join(', ') }, status: :unprocessable_entity
         end
       end
 
@@ -25,6 +26,11 @@ module Api
 
       def booking_params
         params.permit(:unit_id, :first_name, :last_name, :email, :phone_number, :booking_set_at)
+      end
+
+      def assign_booking_to_listing_owner(booking)
+        booking.booking_assigned_to_id = booking.unit.listing.user_id
+        booking.save
       end
     end
   end

@@ -7,7 +7,7 @@ class CreateBookings < ActiveRecord::Migration[7.1]
       t.string :phone_number
       t.string :email, null: false
       t.datetime :booking_set_at, null: false
-      t.string :booking_assigned_to_id
+      t.uuid :booking_assigned_to_id
 
       t.timestamps
     end

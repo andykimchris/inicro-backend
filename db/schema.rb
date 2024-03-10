@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_18_145933) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_17_090641) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -50,7 +50,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_18_145933) do
     t.string "phone_number"
     t.string "email", null: false
     t.datetime "booking_set_at", null: false
-    t.string "booking_assigned_to_id"
+    t.uuid "booking_assigned_to_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["unit_id"], name: "index_bookings_on_unit_id"
