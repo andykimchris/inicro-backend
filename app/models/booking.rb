@@ -9,6 +9,8 @@ class Booking < ApplicationRecord
 
   before_save :normalize_email
 
+  # TODO: add a scope to query in order of scheduling from closest to farthest
+
   def full_name
     [first_name, last_name].compact.join(' ')
   end

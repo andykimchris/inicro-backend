@@ -6,7 +6,7 @@ FactoryBot.define do
     description { Faker::Lorem.paragraph }
     is_available { true }
     metadata { 'There are surveillance cameras also on all corridors, staircases & elevators.' }
-    listing { nil }
+    listing { association(:listing) }
   end
 
   factory :gymnasium do
@@ -14,6 +14,6 @@ FactoryBot.define do
     description { Faker::Lorem.paragraph }
     is_available { false }
     metadata { 'They have free & pro plans for 1 month & 3 months.' }
-    listing { nil }
+    listing { association(:listing) }
   end
 end
