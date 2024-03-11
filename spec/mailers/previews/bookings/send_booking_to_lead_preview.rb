@@ -7,7 +7,7 @@ module Bookings
       booking = Booking.first
       unit = booking.unit
 
-      Bookings::SendBookingToLeadMailer.send_booking_to_lead(booking:, unit:)
+      Bookings::SendBookingToLeadMailer.with(booking:, unit:).send_booking_to_lead
     end
   end
 end

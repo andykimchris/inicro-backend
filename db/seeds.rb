@@ -6,9 +6,10 @@ class Seeding
   def call
     seed_user_data
     seed_listing_data
-    seed_listing_amenities_data
     seed_location_data
     seed_listing_unit_data
+    seed_booking
+    seed_listing_amenities_data
   end
 
   def seed_user_data
@@ -20,17 +21,21 @@ class Seeding
     FactoryBot.create(:listing)
   end
 
-  def seed_listing_amenities_data
-    FactoryBot.create(:security_cameras)
-    FactoryBot.create(:gymnasium)
-  end
-
   def seed_location_data
     FactoryBot.create(:location)
   end
 
   def seed_listing_unit_data
-    FactoryBot.create(:studio_unit)
+    FactoryBot.create(:one_bedroom_unit)
+  end
+
+  def seed_booking
+    FactoryBot.create(:booking)
+  end
+
+  def seed_listing_amenities_data
+    # FactoryBot.create(:security_cameras)
+    # FactoryBot.create(:gymnasium)
   end
 end
 

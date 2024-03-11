@@ -61,11 +61,12 @@ module Api
       private
 
       def unit_params
-                      params.permit(:id, :size, :amount, :identifier, :description, :availability_date, :bathroom_count,
-                      :full_bathroom_count, :is_available, :unit_type, :unit_lease_type, :listing_id, :qrcode,
-                      :floorplan_image, images: [])
+        params.permit(
+          :id, :size, :amount, :identifier, :description, :availability_date, :bathroom_count,
+          :full_bathroom_count, :is_available, :unit_type, :unit_lease_type, :listing_id, :qrcode,
+          :floorplan_image, images: []
+        )
       end
-
     end
   end
 end
