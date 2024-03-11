@@ -61,16 +61,11 @@ module Api
       private
 
       def unit_params
-        params.permit(:id, :size, :amount, :identifier, :description, :availability_date,
-                      :unit_type, :unit_lease_type, :listing_id, :floorplan_image,
-                      :qrcode, images: [])
+                      params.permit(:id, :size, :amount, :identifier, :description, :availability_date, :bathroom_count,
+                      :full_bathroom_count, :is_available, :unit_type, :unit_lease_type, :listing_id, :qrcode,
+                      :floorplan_image, images: [])
       end
 
-      def user_must_be_proprietor
-        return unless current_user&.is_proprietor
-
-        render json: { error: 'Only proprietors can perform this action.' }, status: :forbidden
-      end
     end
   end
 end

@@ -43,6 +43,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_17_090641) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "bookings", force: :cascade do |t|
+    t.bigint "unit_id", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "phone_number"
+    t.string "email", null: false
+    t.datetime "scheduled_at", null: false
+    t.uuid "assigned_to_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["unit_id"], name: "index_bookings_on_unit_id"
+  end
+
   create_table "jwt_denylist", force: :cascade do |t|
     t.string "jti", null: false
     t.datetime "exp", null: false
@@ -141,12 +154,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_17_090641) do
     t.datetime "updated_at", null: false
     t.boolean "is_proprietor", null: false
     t.boolean "is_occupant", null: false
+    t.string "phone_number"
+    t.string "secondary_phone_number"
+    t.string "first_name"
+    t.string "last_name"
+    t.boolean "is_admin", default: false
+    t.boolean "is_internal", default: false
+    t.boolean "is_active", default: false
+    t.boolean "is_support"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "bookings", "units"
   add_foreign_key "listing_amenities", "listings"
   add_foreign_key "listings", "locations"
   add_foreign_key "listings", "users"

@@ -12,9 +12,14 @@ FactoryBot.define do
     full_bathroom_count { 1 }
     description { ' 12-month lease. Please visit our website to schedule a tour.' }
     identifier { 'BO4' }
-    is_available { false }
+    is_available { true }
     unit_lease_type { 0 }
-    availability_date { nil }
+    availability_date { 1.week.from_now }
+
+    trait :unavailable do
+      is_available { false }
+      availability_date { nil }
+    end
 
     after(:build) do |unit|
       image_path = Rails.root.join('spec/factories/media/images/listing-1.jpg')
