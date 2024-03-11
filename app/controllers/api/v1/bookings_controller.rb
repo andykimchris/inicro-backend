@@ -3,6 +3,7 @@
 module Api
   module V1
     class BookingsController < ApplicationController
+      before_action :authenticate_user!, only: %i[index]
       before_action :user_must_be_proprietor, only: %i[index]
 
       def index
