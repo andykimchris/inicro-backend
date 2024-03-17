@@ -3,12 +3,16 @@
 module Api
   module V1
     class ListingsController < ApplicationController
+      include ListingHelper # TODO: implement service objects later
+
       before_action :authenticate_user!, except: :show
       before_action :user_must_be_proprietor, only: %i[create update]
 
       def show
         @listing = Listing.find(params[:id])
-        render json: { success: true, listing: @listing.as_json(include: :images) }, status: :ok
+
+        image_urls = lising_image_urls(@listing)
+        render json: { success: true, listing: @listing.as_json.except('images').merge(image_urls) }, status: :ok
       rescue ActiveRecord::RecordNotFound
         render json: { error: 'Listing not found' }, status: :not_found
       end
@@ -17,12 +21,9 @@ module Api
         @listing = current_user.listings.build(listing_params)
 
         if @listing.save
-          render json: { success: true,
-                         listing: {
-                           id: @listing.id,
-                           title: @listing.title,
-                           images: @listing.images.map { |image| url_for(image) }
-                         } }, status: :created
+
+          image_urls = lising_image_urls(@listing)
+          render json: { success: true, listing: @listing.as_json.except('images').merge(image_urls) }, status: :created
         else
           render json: @listing.errors, status: :unprocessable_entity
         end
@@ -32,7 +33,9 @@ module Api
         @listing = Listing.find(params[:id])
 
         if @listing&.update(listing_params)
-          render json: { success: true, listing: @listing.as_json(include: :images) }, status: :ok
+
+          image_urls = lising_image_urls(@listing)
+          render json: { success: true, listing: @listing.as_json.except('images').merge(image_urls) }, status: :ok
         else
           render json: @listing.errors, status: :unprocessable_entity
         end

@@ -7,7 +7,7 @@ class Booking < ApplicationRecord
   validate :unit_must_be_available, on: :create
   validate :unique_booking_for_user_and_unit, on: :create
 
-  before_save :normalize_email
+  normalizes :email, with: ->(email) { email.strip.downcase }
 
   # TODO: add a scope to query in order of scheduling from closest to farthest
 
@@ -16,10 +16,6 @@ class Booking < ApplicationRecord
   end
 
   private
-
-  def normalize_email
-    self.email = email.strip.downcase
-  end
 
   def unit_must_be_available
     return unless unit && !unit.is_available

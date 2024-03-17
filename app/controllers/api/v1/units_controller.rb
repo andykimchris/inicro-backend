@@ -3,10 +3,10 @@
 module Api
   module V1
     class UnitsController < ApplicationController
-      before_action :authenticate_user!, except: :show
-      # TODO: Investigate why this is failing
-      # before_action :user_must_be_proprietor, only: %i[create update]
       include UnitHelper
+
+      before_action :authenticate_user!, except: :show
+      before_action :user_must_be_proprietor, only: %i[create update]
 
       def show
         @unit ||= Unit.find(params[:id])
@@ -55,7 +55,13 @@ module Api
         # NOTE: 3
         # perhaps send an email to them with details of the unit
 
+        @unit ||= Unit.find(params[:id])
+        @unit.assigned_at = Time.current
+        @unit.is_available = false
+        @unit.save!
         render json: { success: true }, status: :ok
+      rescue ActiveRecord::RecordNotFound
+        render json: { success: false, error: 'Unit not found' }, status: :not_found
       end
 
       private
