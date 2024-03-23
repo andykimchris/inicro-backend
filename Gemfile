@@ -13,9 +13,6 @@ gem 'puma', '>= 5.0'
 
 gem 'devise', '~> 4.9'
 gem 'devise-jwt'
-gem 'omniauth'
-gem 'omniauth-facebook'
-gem 'omniauth-google-oauth2'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
@@ -38,8 +35,7 @@ gem 'aws-sdk-s3', require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin Ajax possible
 # gem 'rack-cors'
 gem 'rack-cors', '>= 1.0.5', '< 2.0.1', require: 'rack/cors' # wait for 2.0.1 fix for CVE bug
-
-gem 'google-cloud-storage', '~> 1.11', require: false
+gem 'rqrcode', '~> 2.2'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

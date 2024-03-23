@@ -29,6 +29,9 @@ Rails.application.routes.draw do
       resources :listings, only: %i[create show update]
       resources :units, only: %i[create show update]
       resources :bookings, only: %i[index create]
+
+      # UNITS
+      post "units/:id/assign_unit_to_occupant", to:"units#assign_unit_to_occupant"
     end
   end
 end
