@@ -29,8 +29,7 @@ class Unit < ApplicationRecord
 
   validate :user_is_occupant
 
-  # TODO: Generate this ONLY when proprietor is giving access to a tenant, create is only for test
-  before_commit :generate_qrcode, on: :create
+  before_commit :generate_qrcode, on: :create unless Rails.env.production?
 
   private
 
