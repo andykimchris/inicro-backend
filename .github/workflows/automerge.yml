@@ -31,3 +31,6 @@ jobs:
         if: ${{ steps.automerge.outputs.mergeResult == 'merged' }}
         run: |
           echo "Pull request ${{ steps.automerge.outputs.pullRequestNumber }} merged!"
+    permissions:
+      contents: write
+      pull-requests: write
