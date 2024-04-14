@@ -3,13 +3,6 @@ on:
   pull_request:
     types:
       - labeled
-      - unlabeled
-      - synchronize
-      - opened
-      - edited
-      - ready_for_review
-      - reopened
-      - unlocked
   pull_request_review:
     types:
       - submitted
@@ -27,6 +20,13 @@ jobs:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           MERGE_DELETE_BRANCH: true
           MERGE_METHOD: "squash"
+      - name: automerge-dependencies
+        uses: pascalgn/automerge-action@v0.16.2
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          MERGE_METHOD: squash
+          MERGE_DELETE_BRANCH: true
+          MERGE_LABELS: "dependencies,!automerge blocked"
       - name: feedback
         if: ${{ steps.automerge.outputs.mergeResult == 'merged' }}
         run: |
