@@ -4,8 +4,7 @@ module Api
   module V1
     class UnitsController < ApplicationController
       before_action :authenticate_user!, except: :show
-      # TODO: Investigate why this is failing
-      # before_action :user_must_be_proprietor, only: %i[create update]
+      before_action :user_must_be_proprietor, only: %i[create update]
 
       def show
         @unit ||= Unit.find(params[:id])

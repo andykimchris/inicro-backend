@@ -7,9 +7,9 @@ class Booking < ApplicationRecord
   validate :unit_must_be_available, on: :create
   validate :unique_booking_for_user_and_unit, on: :create
 
-  before_save :normalize_email
+  default_scope { order(created_at: :desc) }
 
-  # TODO: add a scope to query in order of scheduling from closest to farthest
+  before_save :normalize_email
 
   def full_name
     [first_name, last_name].compact.join(' ')
