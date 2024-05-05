@@ -9,8 +9,8 @@ module Users
     private
 
     def configure_permitted_params
-      devise_parameter_sanitizer.permit(:sign_up,
-                                        keys: %i[email password password_confirmation is_proprietor is_occupant])
+      devise_parameter_sanitizer
+        .permit(:sign_up, keys: %i[email password password_confirmation is_proprietor is_occupant])
     end
 
     def respond_with(resource, _opts = {})

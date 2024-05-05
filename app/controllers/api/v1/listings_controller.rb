@@ -17,12 +17,10 @@ module Api
         @listing = current_user.listings.build(listing_params)
 
         if @listing.save
-          render json: { success: true,
-                         listing: {
-                           id: @listing.id,
-                           title: @listing.title,
-                           images: @listing.images.map { |image| url_for(image) }
-                         } }, status: :created
+          render json: {
+            success: true,
+            listing: { id: @listing.id, title: @listing.title, images: @listing.images.map { |image| url_for(image) } }
+          }, status: :created
         else
           render json: @listing.errors, status: :unprocessable_entity
         end
