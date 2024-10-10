@@ -10,7 +10,7 @@ class Listing < ApplicationRecord
 
   has_many_attached :images
 
-  enum listing_type: { residential: 0, commercial: 1, land: 2 }
+  enum :listing_type, { residential: 0, commercial: 1, land: 2 }
 
   validates :title, :description, presence: true
   validates :floor_count, presence: true, if: -> { listing_type.in?(%w[residential commercial]) }

@@ -11,8 +11,8 @@ class Unit < ApplicationRecord
   has_one_attached :floorplan_image
   has_many_attached :images
 
-  enum unit_type: { studio: 0, '1-bedroom': 1, '2-bedroom': 2, '3-bedroom': 3 }
-  enum unit_lease_type: { rental: 0, purchase: 1 }
+  enum :unit_type, { studio: 0, '1-bedroom': 1, '2-bedroom': 2, '3-bedroom': 3 }
+  enum :unit_lease_type, { rental: 0, purchase: 1 }
 
   validates :amount, :unit_type, :unit_lease_type, presence: true
   validates :floorplan_image,
