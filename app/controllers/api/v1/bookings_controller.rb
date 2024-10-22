@@ -20,7 +20,7 @@ module Api
           BookingJobs::MailToLeadJob.perform_later(booking.id)
           render json: { success: true }, status: :created
         else
-          render json: { message: booking.errors.full_messages.join(', ') }, status: :unprocessable_entity
+          render json: { error: booking.errors.full_messages.join(', ') }, status: :unprocessable_content
         end
       end
 

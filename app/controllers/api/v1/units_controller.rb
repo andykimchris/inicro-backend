@@ -18,7 +18,7 @@ module Api
         if @unit.save
           render json: { success: true, unit: @unit.as_json(include: :images) }, status: :created
         else
-          render json: { error: @unit.errors, status: :unprocessable_entity }
+          render json: { error: @unit.errors }, status: :unprocessable_content
         end
       end
 
@@ -28,7 +28,7 @@ module Api
         if @unit&.update(unit_params)
           render json: { success: true, unit: @unit }, status: :ok
         else
-          render json: { error: @unit.errors, status: :unprocessable_entity }
+          render json: { error: @unit.errors }, status: :unprocessable_content
         end
       rescue ActiveRecord::RecordNotFound
         render json: { success: false, error: 'Unit not found' }, status: :not_found

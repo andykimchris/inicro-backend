@@ -126,9 +126,9 @@ RSpec.describe 'Api::V1::Listings' do
       end
 
       context 'with invalid params' do
-        it 'returns unprocessable entity (422) status' do
+        it 'returns unprocessable content (422) status' do
           patch update_listing_url, params: { id: listing.id, title: '' }
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(:unprocessable_content)
         end
       end
 

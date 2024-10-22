@@ -9,7 +9,7 @@ RSpec.describe User do
       expect(user).to be_valid
     end
 
-    it 'returns unprocessable entity (422) when both share the same data' do
+    it 'returns unprocessable content (422) when both share the same data' do
       user = described_class.new(
         email: 'johndoe@mail.com',
         password: 'johndoe123!',
@@ -28,7 +28,7 @@ RSpec.describe User do
       expect(user).to be_valid
     end
 
-    it "returns unprocessable entity (422) when password doesn't match regex" do
+    it "returns unprocessable content (422) when password doesn't match regex" do
       user = described_class.new(
         email: 'johndoe@mail.com',
         password: 'johndoe123!',

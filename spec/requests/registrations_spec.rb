@@ -34,8 +34,8 @@ RSpec.describe 'Registrations' do
       } }
     end
 
-    it 'returns unprocessable entity (422)' do
-      expect(response).to have_http_status :unprocessable_entity
+    it 'returns unprocessable content (422)' do
+      expect(response).to have_http_status :unprocessable_content
     end
   end
 end
