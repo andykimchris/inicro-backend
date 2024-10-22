@@ -134,8 +134,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_11_100313) do
     t.datetime "availability_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "assigned_at"
-    t.uuid "assigned_by_id"
     t.index ["listing_id"], name: "index_units_on_listing_id"
     t.index ["user_id"], name: "index_units_on_user_id"
   end
