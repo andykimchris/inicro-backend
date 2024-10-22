@@ -35,7 +35,7 @@ gem 'aws-sdk-s3', require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin Ajax possible
 # gem 'rack-cors'
-gem 'rack-cors', '>= 1.0.5', '< 2.0.1', require: 'rack/cors' # wait for 2.0.1 fix for CVE bug
+gem 'rack-cors', '>= 1.0.5', '< 2.0.1', require: 'rack/cors' # TODO: wait for 2.0.1 fix for CVE bug
 
 gem 'google-cloud-storage', '~> 1.11', require: false
 
