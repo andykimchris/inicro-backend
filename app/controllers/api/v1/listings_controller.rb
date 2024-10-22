@@ -22,7 +22,7 @@ module Api
             listing: { id: @listing.id, title: @listing.title, images: @listing.images.map { |image| url_for(image) } }
           }, status: :created
         else
-          render json: @listing.errors, status: :unprocessable_entity
+          render json: { error: @unit.errors, status: :unprocessable_entity }
         end
       end
 
@@ -32,7 +32,7 @@ module Api
         if @listing&.update(listing_params)
           render json: { success: true, listing: @listing.as_json(include: :images) }, status: :ok
         else
-          render json: @listing.errors, status: :unprocessable_entity
+          render json: { error: @unit.errors, status: :unprocessable_entity }
         end
       rescue ActiveRecord::RecordNotFound
         render json: { success: false, error: 'Listing not found' }, status: :not_found

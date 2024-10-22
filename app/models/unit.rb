@@ -4,7 +4,7 @@ class Unit < ApplicationRecord
   belongs_to :listing
   belongs_to :user, optional: true
 
-  has_many :unit_wishlists # rubocop:disable Rails/HasManyOrHasOneDependent
+  has_many :unit_wishlists, dependent: :nullify
   has_many :users, through: :unit_wishlists
   has_many :bookings, dependent: :destroy
 

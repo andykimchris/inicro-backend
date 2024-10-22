@@ -7,7 +7,7 @@ module Api
       before_action :user_must_be_proprietor, only: %i[create update]
 
       def show
-        @unit ||= Unit.find(params[:id])
+        @unit = Unit.find(params[:id])
         render json: { success: true, unit: @unit.as_json(include: :images) }, status: :ok
       rescue ActiveRecord::RecordNotFound
         render json: { error: 'Unit not found' }, status: :not_found
@@ -28,7 +28,7 @@ module Api
         if @unit&.update(unit_params)
           render json: { success: true, unit: @unit }, status: :ok
         else
-          render json: @unit.errors, status: :unprocessable_entity
+          render json: { error: @unit.errors, status: :unprocessable_entity }
         end
       rescue ActiveRecord::RecordNotFound
         render json: { success: false, error: 'Unit not found' }, status: :not_found
