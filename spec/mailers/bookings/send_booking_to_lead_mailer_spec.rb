@@ -17,9 +17,9 @@ RSpec.describe Bookings::SendBookingToLeadMailer do
     end
 
     it 'renders the body' do
-      expect(mail.body.encoded).to match(booking.first_name)
-      expect(mail.body.encoded).to match(booking.last_name)
-      expect(mail.body.encoded).to match(unit.listing.title)
+      expect(mail.body.encoded).to include(booking.first_name)
+      expect(mail.body.encoded).to include(booking.last_name)
+      expect(mail.body.encoded).to include(unit.listing.title)
     end
   end
 end
