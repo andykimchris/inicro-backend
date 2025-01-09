@@ -17,7 +17,7 @@ test:
 
 production:
   <<: *default
-  username: Rails.application.credentials.inicro_prod_user
-  password: Rails.application.credentials.inicro_prod_password
-  host: Rails.application.credentials.inicro_prod_host
-  port: Rails.application.credentials.inicro_prod_port
+  username: <%= Rails.application.credentials.dig(:inicro_db, :user) %>
+  password: <%= Rails.application.credentials.dig(:inicro_db, :password) %>
+  host: <%= Rails.application.credentials.dig(:inicro_db, :host) %>
+  port: <%= Rails.application.credentials.dig(:inicro_db, :port) %>

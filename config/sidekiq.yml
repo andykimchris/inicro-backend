@@ -1,8 +1,9 @@
 ---
 :verbose: true
 :logfile: ./log/sidekiq.log
-:concurrency: 3
-:max_retries: 5
+:concurrency: <%= Rails.application.credentials.dig(:sidekiq, :concurrency) || 5 %>  
+:timeout: <%= Rails.application.credentials.dig(:sidekiq, :timeout) || 30 %>       
+:max_retries: <%= Rails.application.credentials.dig(:sidekiq, :max_retries) || 3 %>  
 
 # TODO: Eventually create queues for separate environments, we don't want to enqueue all jobs locally
 :queues:
@@ -10,3 +11,4 @@
   - high
   - default
   - low
+
